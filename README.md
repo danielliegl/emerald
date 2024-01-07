@@ -39,7 +39,7 @@ We used MongoDB Atlas for this example, feel free to use any other MongoDB host.
 
 - Add these Values to the Environment Variables in your deployment:
   - `MONGODB_URI`: Your MongoDB URI to access your Database.
-  - `MONGODB_DATABASE`: The name of your MongoDB Database
+  - `MONGODB_DATABASE`: The name of your MongoDB Database.
   - `MONGODB_COLLECTION_SCRIPTS`: Name of the Collection which stores the
     Scripts.
   - `MONGODB_COLLECTION_USERS`: Name of Collection which stores the Users.
