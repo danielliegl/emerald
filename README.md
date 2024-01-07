@@ -21,4 +21,4 @@
 ## Deploying Emerald
 
 ## Backend API
-Documentation for the backend can be found [here](APIDocumentation.md).
+Documentation for the backend can be found [here](doc/APIDocumentation.md).
