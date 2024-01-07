@@ -59,6 +59,39 @@ Parameters:
 | ---- | ---- | ---- |
 | `id` | MongoDB Object ID | ID of the Script to be loaded (required) |
 
+Returns Script data as JSON on Success:
+```
+200 OK
+{
+	"_id": "65953e22645e0f0216baf95f",
+	"name": "Requirements List",
+	"owner": "65953d29645e0f0216baf95c",
+	"isPublic": true,
+	"assignedUsers": [
+		"65953fb2645e0f0216baf960"
+	],
+	"requirements": [
+		{
+			"name": "Is very good.",
+			"values": [
+				{
+					"user": "65953fb2645e0f0216baf960",
+					"value": true
+				}
+			],
+			"isBoolean": true
+		}
+	]
+}
+```
+
+Return on not found:
+```
+404 Not Found
+No Script with ID 65953e22645e0f0216ba295f found.
+```
+
+
 ### Create Script
 Endpoint: `/.netlify/functions/create_script`
 
