@@ -29,9 +29,9 @@ We used MongoDB Atlas for this example, feel free to use any other MongoDB host.
 3. Create a new Database within the Deployment.
 4. Create 3 different Collections within the Deployment. You can name these as
    you like. For this guide we will call them:
-  - `Users`
-  - `Scripts`
-  - `Sessions`
+    - `Users`
+    - `Scripts`
+    - `Sessions`
 5. TODO: describe allowing connection from netlify
 
 
