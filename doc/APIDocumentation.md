@@ -1,7 +1,44 @@
+## Script Object
+Example:
+
+```
+{
+  "_id": {
+    "$oid": "65953e22645e0f0216baf95f" ##MongoDB ObjectId
+  },
+  "name": "Requirements List", ##Name of the Script
+  "owner": {
+    "$oid": "65953d29645e0f0216baf95c" ##Owner of the Script defined by ObjectId
+  },
+  "isPublic": true, ##When this is true, the script is public and can be processed by asigned users.
+  "assignedUsers": [
+    {
+      "$oid": "65953fb2645e0f0216baf960"
+    }
+  ],
+  "requirements": [ ##This Array is filled with Requirement Objects
+    {
+      "name": "Is very good.",
+      "values": [ ##Save values for multiple users
+        {
+          "user": {
+            "$oid": "65953fb2645e0f0216baf960"
+          },
+          "value": true ##Requirement value can either be bool or int
+        }
+      ],
+      "isBoolean": true ##When false, this is treated as an int value
+    }
+  ]
+}
+```
+
 ## User Authentication
 ### Register User
 Endpoint: `/.netlify/functions/register`
+
 Method: POST
+
 Parameters:
 
 | Parameter | Type | Description |
@@ -13,15 +50,20 @@ Parameters:
 
 ### Load Script
 Endpoint: `/.netlify/functions/load_script`
+
 Method: POST
+
 Parameters:
 
 | Parameter | Type | Description |
 | ---- | ---- | ---- |
 | `id` | MongoDB Object ID | ID of the Script to be loaded (required) |
+
 ### Create Script
 Endpoint: `/.netlify/functions/create_script`
+
 Method: POST
+
 Parameters:
 
 | Parameter | Type | Description |
@@ -48,7 +90,9 @@ Returns on Success:
 Replaces an existing Script's data with new modified data.
 
 Endpoint: `/.netlify/functions/edit_script`
+
 Method: POST
+
 Parameters:
 
 | Parameter | Type | Description |
@@ -71,7 +115,9 @@ Returns on Success:
 ```
 ### Delete Script
 Endpoint: `/.netlify/functions/delete_script`
+
 Method: POST
+
 Parameters:
 
 | Parameter | Type | Description |
