@@ -5,9 +5,17 @@ const handler = async (event) => {
     const database = await connectToDatabase()
     const collection = database.collection(process.env.MONGODB_COLLECTION_SCRIPTS);
     const results = await collection.find({}).limit(10).toArray();
+    var retval = []
+    results.forEach(script => 
+      retval.push({
+        _id: script._id,
+        name: script.name
+      })
+    );
+
     return {
       statusCode: 200,
-      body: JSON.stringify(results),
+      body: JSON.stringify(retval),
     }
   }
   catch (error)

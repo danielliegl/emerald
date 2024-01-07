@@ -48,6 +48,33 @@ Parameters:
 
 ## Manipulating Scripts
 
+### Get Scripts
+Gets all available scripts.
+
+Endpoint: `/.netlify/functions/get_scripts`
+
+Method: POST
+
+Parameters: none
+
+Returns Script names and ID as JSON on Success:
+```
+200 OK
+[
+    {
+        "_id": "65953e22645e0f0216baf95f",
+        "name": "Requirements List"
+    },
+    {
+        "_id": "6599af3edd1541bd96105dc0",
+        "name": "New Script"
+    },
+    {
+        "_id": "6599afcd319a788ac3468f7b",
+        "name": "Edited agAIN"
+    }
+]
+```
 ### Load Script
 Endpoint: `/.netlify/functions/load_script`
 
