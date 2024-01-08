@@ -4,17 +4,14 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import {LoginComponent} from "./login/login.component";
 
 const routes: Routes =[
-  {
-    path: '',
-    redirectTo: 'emerald-app',
-    pathMatch: 'full',
-  }, {
-    path: '',
-    component: AdminLayoutComponent,
+  {path: 'login', component: LoginComponent },
+  {path: '', redirectTo: '/login', pathMatch: 'full' }, // Default route to login
+  {path: 'admin', component: AdminLayoutComponent,
     children: [{
-      path: '',
+      path: 'admin-dashboard',
       loadChildren: () => import('./layouts/admin-layout/admin-layout.module').then(m => m.AdminLayoutModule)
     }]
   }
