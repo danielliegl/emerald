@@ -128,13 +128,13 @@
                         </label>
                       </div>
                     </td>
-                    <td [style.color]="cellColor" #targetCell>Sign contract for "What are conference organizers afraid of?"</td>
+                    <td >Guidline 1: This is a Test."</td>
                     <td class="td-actions text-right">
-                      <button mat-raised-button type="button" matTooltip="Success" [matTooltipPosition]="'above'" class="btn btn-success btn-link btn-sm btn-just-icon" (click)="changeColor()">
-                        <i class="material-icons">check</i>
+                      <button  mat-raised-button type="button" matTooltip="Pass" [matTooltipPosition]="'above'" class="btn btn-success btn-link btn-sm btn-just-icon" (click)="changeColor('pass')">
+                        <i [ngClass]="{'default-pass': this.default, 'green': this.pass}" class="material-icons">check</i>
                       </button>
-                      <button mat-raised-button type="button" matTooltip="Failure" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon" (click)="changeColorRed()">
-                        <i class="material-icons">close</i>
+                      <button mat-raised-button type="button" matTooltip="Fail" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon" (click)="changeColor('fail')">
+                        <i [ngClass]="{'default-fail': this.default, 'red': this.fail}" class="material-icons">close</i>
                       </button>
                     </td>
                   </tr>
@@ -149,13 +149,13 @@
                         </label>
                       </div>
                     </td>
-                    <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
+                    <td>Guidline 2: This is another Test.</td>
                     <td class="td-actions text-right">
-                      <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
-                        <i class="material-icons">edit</i>
+                      <button mat-raised-button type="button" matTooltip="Pass" [matTooltipPosition]="'above'" class="btn btn-success btn-link btn-sm btn-just-icon" (click)="changeColor('pass')">
+                        <i [ngClass]="{'default-pass': this.default, 'green': this.pass}" class="material-icons">check</i>
                       </button>
-                      <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
-                        <i class="material-icons">close</i>
+                      <button mat-raised-button type="button" matTooltip="Fail" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon" (click)="changeColor('fail')">
+                        <i [ngClass]="{'default-fail': this.default, 'red': this.fail}" class="material-icons">close</i>
                       </button>
                     </td>
                   </tr>
@@ -170,14 +170,13 @@
                         </label>
                       </div>
                     </td>
-                    <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                    </td>
+                    <td>Guidline 3: Yet another Test.</td>
                     <td class="td-actions text-right">
-                      <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
-                        <i class="material-icons">edit</i>
+                      <button mat-raised-button type="button" matTooltip="Pass" [matTooltipPosition]="'above'" class="btn btn-success btn-link btn-sm btn-just-icon" (click)="changeColor('pass')">
+                        <i [ngClass]="{'default-pass': this.default, 'green': this.pass}" class="material-icons">check</i>
                       </button>
-                      <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
-                        <i class="material-icons">close</i>
+                      <button mat-raised-button type="button" matTooltip="Fail" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon" (click)="changeColor('fail')">
+                        <i [ngClass]="{'default-fail': this.default, 'red': this.fail}" class="material-icons">close</i>
                       </button>
                     </td>
                   </tr>
@@ -192,13 +191,13 @@
                         </label>
                       </div>
                     </td>
-                    <td>Create 4 Invisible User Experiences you Never Knew About</td>
+                    <td>Guidline 4: Could you stop testing please.</td>
                     <td class="td-actions text-right">
-                      <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
-                        <i class="material-icons">edit</i>
+                      <button mat-raised-button type="button" matTooltip="Pass" [matTooltipPosition]="'above'" class="btn btn-success btn-link btn-sm btn-just-icon" (click)="changeColor('pass')">
+                        <i [ngClass]="{'default-pass': this.default, 'green': this.pass}" class="material-icons">check</i>
                       </button>
-                      <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
-                        <i class="material-icons">close</i>
+                      <button mat-raised-button type="button" matTooltip="Fail" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon" (click)="changeColor('fail')">
+                        <i [ngClass]="{'default-fail': this.default, 'red': this.fail}" class="material-icons">close</i>
                       </button>
                     </td>
                   </tr>
@@ -219,13 +218,13 @@
                         </label>
                       </div>
                     </td>
-                    <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
+                    <td [ngClass]="{'default-color': default, 'green': pass, 'red': fail}">Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
                     </td>
                     <td class="td-actions text-right">
-                      <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
-                        <i class="material-icons">edit</i>
+                      <button mat-raised-button type="button" matTooltip="Pass" [matTooltipPosition]="'above'" class="btn btn-success btn-link btn-sm btn-just-icon" (click)="changeColor('pass')">
+                        <i class="material-icons">check</i>
                       </button>
-                      <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                      <button mat-raised-button type="button" matTooltip="Fail" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon" (click)="changeColor('fail')">
                         <i class="material-icons">close</i>
                       </button>
                     </td>
@@ -241,12 +240,12 @@
                         </label>
                       </div>
                     </td>
-                    <td>Sign contract for "What are conference organizers afraid of?"</td>
+                    <td [ngClass]="{'default-color': default, 'green': pass, 'red': fail}">Sign contract for "What are conference organizers afraid of?"</td>
                     <td class="td-actions text-right">
-                      <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
-                        <i class="material-icons">edit</i>
+                      <button mat-raised-button type="button" matTooltip="Pass" [matTooltipPosition]="'above'" class="btn btn-success btn-link btn-sm btn-just-icon" (click)="changeColor('pass')">
+                        <i class="material-icons">check</i>
                       </button>
-                      <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                      <button mat-raised-button type="button" matTooltip="Fail" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon" (click)="changeColor('fail')">
                         <i class="material-icons">close</i>
                       </button>
                     </td>
@@ -268,12 +267,12 @@
                         </label>
                       </div>
                     </td>
-                    <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
+                    <td [ngClass]="{'default-color': default, 'green': pass, 'red': fail}">Lines From Great Russian Literature? Or E-mails From My Boss?</td>
                     <td class="td-actions text-right">
-                      <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
-                        <i class="material-icons">edit</i>
+                      <button mat-raised-button type="button" matTooltip="Pass" [matTooltipPosition]="'above'" class="btn btn-success btn-link btn-sm btn-just-icon" (click)="changeColor('pass')">
+                        <i class="material-icons">check</i>
                       </button>
-                      <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                      <button mat-raised-button type="button" matTooltip="Fail" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon" (click)="changeColor('fail')">
                         <i class="material-icons">close</i>
                       </button>
                     </td>
@@ -289,13 +288,13 @@
                         </label>
                       </div>
                     </td>
-                    <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
+                    <td *ngFor="">Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
                     </td>
                     <td class="td-actions text-right">
-                      <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
-                        <i class="material-icons">edit</i>
+                      <button mat-raised-button type="button" matTooltip="Pass" [matTooltipPosition]="'above'" class="btn btn-success btn-link btn-sm btn-just-icon" (click)="changeColor('pass')">
+                        <i class="material-icons">check</i>
                       </button>
-                      <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                      <button mat-raised-button type="button" matTooltip="Fail" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon" (click)="changeColor('fail')">
                         <i class="material-icons">close</i>
                       </button>
                     </td>
@@ -311,12 +310,12 @@
                         </label>
                       </div>
                     </td>
-                    <td>Sign contract for "What are conference organizers afraid of?"</td>
+                    <td [ngClass]="{'default-color': default, 'green': pass, 'red': fail}">Sign contract for "What are conference organizers afraid of?"</td>
                     <td class="td-actions text-right">
-                      <button mat-raised-button type="button" matTooltip="Edit Task" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
-                        <i class="material-icons">edit</i>
+                      <button mat-raised-button type="button" matTooltip="Pass" [matTooltipPosition]="'above'" class="btn btn-success btn-link btn-sm btn-just-icon" (click)="changeColor('pass')">
+                        <i class="material-icons">check</i>
                       </button>
-                      <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                      <button mat-raised-button type="button" matTooltip="Fail" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon" (click)="changeColor('fail')">
                         <i class="material-icons">close</i>
                       </button>
                     </td>

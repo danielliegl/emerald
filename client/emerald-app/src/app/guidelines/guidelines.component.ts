@@ -1,4 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import def from 'ajv/dist/vocabularies/discriminator';
 import * as Chartist from 'chartist';
 
 @Component({
@@ -7,18 +8,48 @@ import * as Chartist from 'chartist';
   styleUrls: ['./guidelines.component.css']
 })
 export class GuidelinesComponent implements OnInit {
-  cellColor: string = ''; // Initial color
+  cellColor: string = 'default-color'; // Initial color
+
+  toggle = true;
+
+  // Color Selection Flags
+  default = true;
+  pass = false;
+  fail = false;
+
+
   @ViewChild('targetCell') targetCell!: ElementRef;
 
   constructor() { }
-  changeColor() {
-    // Change the font color of the target cell
-    this.cellColor = 'green'; // Change this to the color you want
+  // changeColor() {
+  //   // Change the font color of the target cell
+  //   // this.cellColor = 'green'; // Change this to the color you want
+  // }
+
+  changeColor(cond: string) {
+    switch(cond){
+      case 'pass':
+        this.default = false;
+        this. pass = true;
+        this.fail = false;
+        break;
+      case 'fail':
+        this.default = false;
+        this.pass = false;
+        this.fail = true;
+        break;
+      default:
+        this.default = true;
+        this.pass = false;
+        this.fail = false;
+        break;
+    }
   }
 
   changeColorRed() {
     // Change the font color of the target cell
-    this.cellColor = 'red'; // Change this to the color you want
+    // this.cellColor = 'red'; // Change this to the color you want
+    this.cellColor = '#DD5A5E';
   }
 
   startAnimationForLineChart(chart){

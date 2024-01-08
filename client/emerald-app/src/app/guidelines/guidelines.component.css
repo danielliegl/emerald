@@ -1,0 +1,27 @@
+.green{
+    /* background-color: #06D889; */
+    background-color: #63B967;
+    color: #ffffff;
+}
+
+.red{
+    /* background-color: #DD5A5E; */
+    background-color: #F44336;
+    color: #ffffff;
+}
+
+.default-color{
+    background-color: #ffffff;
+    color:#3E4858;
+}
+
+.default-pass{
+    background-color: #ffffff;
+    color:#63B967;
+}
+
+.default-fail{
+    background-color: #ffffff;
+    color:#F44336;
+}
+
