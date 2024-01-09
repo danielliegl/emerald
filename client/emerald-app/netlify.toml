@@ -1,6 +1,6 @@
 [build]
   base = "./client/emerald-app"
-  command = "ng build --prod"
+  command = "ng build"
   publish = "./client/emerald-app/dist/emerald-app/browser"
 
 # Functions configuration
