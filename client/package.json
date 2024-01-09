@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@angular/material": "^17.0.4",
+    "@netlify/angular-runtime": "^2.0.4",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.3.1",
     "mongodb": "^6.3.0"
