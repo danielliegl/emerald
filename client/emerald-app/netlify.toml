@@ -1,13 +1,13 @@
 [build]
   base = "./client/emerald-app"
-  command = "npm run start"
+  command = "ng build --prod"
   publish = "./client/emerald-app/dist/emerald-app/browser"
 
 # Functions configuration
 [functions]
   external_node_modules = ["express"]
   node_bundler = "esbuild"
-  directory = "./client/emerald-app/netlify/functions"
+  directory = "./netlify/functions"
 
 # Redirects configuration
 [[redirects]]
