@@ -1,22 +1,17 @@
+const { ObjectId } = require("mongodb");
 const { connectToDatabase } = require("../mongoDB");
 const { verify_jwt } = require("../verify_token");
 
 const handler = async (event) => {
   try {
     const decodedUser = verify_jwt(event.headers)
-
-
-    if(!decodedUser.admin)
-    {
-      return{
-        statusCode: 401
-      }
-    }
-
+    console.log(decodedUser)
+    const user_id = new ObjectId(decodedUser.user_id)
 
     const database = await connectToDatabase()
     const collection = database.collection(process.env.MONGODB_COLLECTION_SCRIPTS);
-    const results = await collection.find({}).limit(10).toArray();
+    const results = await collection.find({assignedUsers: {$in: [user_id]}}).limit(10).toArray();
+    
     var retval = []
     results.forEach(script => 
       retval.push({

@@ -1,9 +1,12 @@
 const { connectToDatabase } = require("../mongoDB")
 const { Script } = require("../script")
 const { ObjectId } = require("mongodb")
+const { verify_jwt } = require("../verify_token")
 
 const handler = async (event) => {
   try {
+    const decodedUser = verify_jwt(event.headers)
+
     const requestData = JSON.parse(event.body)
     const database = await connectToDatabase()
     const collection = database.collection(process.env.MONGODB_COLLECTION_SCRIPTS);
@@ -23,6 +26,13 @@ const handler = async (event) => {
       return {
         statusCode: 400,
         body: "No script with ID: " + script_id
+      }
+    }
+
+    if(!(found_script.owner === decodedUser.user_id))
+    {
+      return{
+        statusCode: 401
       }
     }
 

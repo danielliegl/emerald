@@ -1,9 +1,18 @@
 const { connectToDatabase } = require('../mongoDB');
 const bcrypt = require("bcrypt");
+const { verify_jwt } = require('../verify_token');
 require('dotenv').config();
 
 const handler = async (event) => {
   try {
+    const decodedUser = verify_jwt(event.handler)
+    if(!decodedUser.admin)
+    {
+      return {
+        statusCode: 401
+      }
+    }
+
     const db = await connectToDatabase();
     const users = db.collection(process.env.MONGODB_COLLECTION_USERS); // Assuming a collection named 'users'
 

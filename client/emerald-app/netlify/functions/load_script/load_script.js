@@ -1,12 +1,14 @@
 const { connectToDatabase } = require("../mongoDB")
 const { ObjectId }  = require("mongodb")
+const { verify_jwt } = require("../verify_token")
+
 const handler = async (event) => {
   try {
-
     const requestData = JSON.parse(event.body)
     const database = await connectToDatabase()
     const collection = database.collection(process.env.MONGODB_COLLECTION_SCRIPTS);
     const script_id = requestData.id;
+    const decodedUserID = verify_jwt(event.headers)
 
     if(!script_id)
     {
