@@ -13,6 +13,7 @@ import { ReviewerPanelComponent } from './reviewer-panel/reviewer-panel.componen
 import { ProjectOwnerPanelComponent } from './project-owner-panel/project-owner-panel.component';
 import { UserSidebarComponent } from './user-sidebar/user-sidebar.component';
 import { AdminSidebarComponent } from './admin-sidebar/admin-sidebar.component';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   imports: [
@@ -33,6 +34,7 @@ import { AdminSidebarComponent } from './admin-sidebar/admin-sidebar.component';
     ProjectOwnerPanelComponent,
     UserSidebarComponent,
     AdminSidebarComponent,
+    UsersComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

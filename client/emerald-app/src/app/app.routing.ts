@@ -18,6 +18,7 @@ const routes: Routes =[
   {path: 'project-owner-panel', component: ProjectOwnerPanelComponent},
   {path: 'admin-panel', component: AdminPanelComponent},
   {path: 'admin-dashboard', component: AdminDashboardComponent},
+  // What is happening.
   {path: 'admin', component: AdminLayoutComponent,
     children: [{
       path: 'admin-dashboard',
