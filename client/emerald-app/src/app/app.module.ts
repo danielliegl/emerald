@@ -8,6 +8,11 @@ import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import {LoginComponent} from "./login/login.component";
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { ReviewerPanelComponent } from './reviewer-panel/reviewer-panel.component';
+import { ProjectOwnerPanelComponent } from './project-owner-panel/project-owner-panel.component';
+import { UserSidebarComponent } from './user-sidebar/user-sidebar.component';
+import { AdminSidebarComponent } from './admin-sidebar/admin-sidebar.component';
 
 @NgModule({
   imports: [
@@ -23,6 +28,11 @@ import {LoginComponent} from "./login/login.component";
   declarations: [
     AppComponent,
     AdminLayoutComponent,
+    AdminPanelComponent,
+    ReviewerPanelComponent,
+    ProjectOwnerPanelComponent,
+    UserSidebarComponent,
+    AdminSidebarComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -10,8 +10,14 @@
           <input matInput placeholder="Password" type="password">
         </mat-form-field>
         <div class="actions">
+          <!-- Routing from Login to Dashboard-Panel via Login Button (before changes: '/admin')-->
           <button mat-raised-button color="primary" [routerLink]="['/admin']">Login</button>
-          <p class="register-link">Don't have an account? <a routerLink="/register">Register here</a></p>
+
+          <!-- Buttons for Debugging and Development -->
+          <button mat-raised-button color="primary" [routerLink]="['/admin-panel']">Admin panel</button>
+          <button mat-raised-button color="primary" [routerLink]="['/reviewer-panel']">Reviewer Panel</button>
+          <button mat-raised-button color="primary" [routerLink]="['/project-owner-panel']">Project Owner Panel</button>
+          <p class="register-link">Don't have an account? Register<a href="/admin-dashboard"> here</a></p>
         </div>
       </form>
     </mat-card-content>
