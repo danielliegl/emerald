@@ -10,15 +10,31 @@ const handler = async (event) => {
 
     const database = await connectToDatabase()
     const collection = database.collection(process.env.MONGODB_COLLECTION_SCRIPTS);
-    const results = await collection.find({assignedUsers: {$in: [user_id]}}).limit(10).toArray();
+    const results = await collection.find({
+    $or: [
+      { owner: user_id },
+      { assignedUsers: { $in: [user_id] } }
+    ]
+  }).limit(10).toArray();
     
-    var retval = []
-    results.forEach(script => 
-      retval.push({
-        _id: script._id,
-        name: script.name
-      })
-    );
+    var retval = {user_scripts: [], assigned_scripts:[]}
+    results.forEach(script => {
+      if(script.owner.equals(user_id))
+      {
+        retval.user_scripts.push({
+          id: script._id,
+          name: script.name
+        })
+      }
+      else
+      {
+        retval.assigned_scripts.push({
+          id: script._id,
+          name: script.name
+        })
+      }
+
+  });
 
     return {
       statusCode: 200,
