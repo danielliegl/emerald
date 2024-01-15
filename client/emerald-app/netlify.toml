@@ -1,0 +1,16 @@
+[build]
+  base = "./client/emerald-app"
+  command = "ng build"
+
+# Functions configuration
+[functions]
+  external_node_modules = ["express"]
+  node_bundler = "esbuild"
+  directory = "./netlify/functions"
+
+# Redirects configuration
+[[redirects]]
+  force = true
+  from = "/api/*"
+  status = 200
+  to = "/.netlify/functions/api/:splat"
