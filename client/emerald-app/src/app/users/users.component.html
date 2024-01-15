@@ -1,3 +1,44 @@
+<div class="container">
+  <div class="container-fluid">
+    <mat-card>
+      <h2>Enter new User</h2>
+      <form [formGroup]="addUserForm" (ngSubmit)="this.saveUser()">
+        <mat-form-field>
+          <input matInput placeholder="ID" formControlName="id" />
+        </mat-form-field>
+        <br />
+        <mat-form-field>
+          <input matInput placeholder="Name" formControlName="name" />
+        </mat-form-field>
+        <br />
+        <mat-form-field>
+          <input matInput placeholder="Password" formControlName="password">
+        </mat-form-field>
+        <br />
+        <mat-form-field>
+          <input matInput placeholder="Admin" formControlName="admin" />
+        </mat-form-field>
+        <br />
+        <button [disabled]="!addUserForm.valid" mat-raised-button type="submit">
+          Add User
+        </button>
+      </form>
+    </mat-card>
+    <mat-card>
+      <h2>List of new Users</h2>
+      <ng-container *ngFor="let user of users">
+        {{ user.id }} - {{ user.name }} - {{ user.password }} - {{ user.admin}}<br />
+      </ng-container>
+    </mat-card>
+    <mat-card>
+      <h2>List of registered Users</h2>
+      <ng-container *ngFor="let user of usersTyped">
+        {{ user.id }} - {{ user.name }} - {{ user.password }} - {{ user.admin}}<br />
+      </ng-container>
+    </mat-card>
+  </div>
+</div>
+
 <!-- <div class="main-content">
     <div class="container-fluid">
         <ng-container matColumnDef="userName">
@@ -7,7 +48,7 @@
     </div>
 </div> -->
 
-<div class="main-content">
+<!-- <div class="main-content">
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-12 col-md-12">
@@ -116,6 +157,39 @@
           </div>
         </div>
       </div>
+      <div class="actions">
+        <button mat-raised-button color="primary" (click)="getUsers()">Update Users</button>
+      </div>
+      <h1>Anguar http POST request example</h1>
+      <div class="card">
+        <h2>Enter id, name, password and if admin.</h2>
+        <div class="card">
+          <h2>Enter name and job</h2>
+          <form [formGroup]="addUserForm" (ngSubmit)="saveUser()">
+            <mat-form-field>
+              <input matInput placeholder="Name" formControlName="name" />
+            </mat-form-field>
+            <br />
+            <mat-form-field>
+              <input matInput placeholder="Job" formControlName="job" />
+            </mat-form-field>
+            <br />
+            <button [disabled]="!addUserForm.valid" mat-raised-button type="submit">
+              Add User
+            </button>
+          </form>
+        </div>
+        <div class="card">
+          <h2>List of Users</h2>
+          <ng-container *ngFor="let user of users">
+            {{ user.name }} - {{ user.job }}<br />
+          </ng-container>
+        </div>
+        <h2>List of Users</h2>
+        <ng-container *ngFor="let user of users">
+          {{ user.name }} - {{ user.job }}<br />
+        </ng-container>
+      </div>
     </div>
-  </div>
+  </div> -->
   

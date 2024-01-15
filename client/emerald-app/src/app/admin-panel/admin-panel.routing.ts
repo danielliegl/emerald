@@ -11,7 +11,9 @@ import {GuidelinesComponent} from "../guidelines/guidelines.component";
 import {TestComponent} from "../test/test.component";
 import {ReviewerPanelComponent} from "../reviewer-panel/reviewer-panel.component";
 import { UsersComponent } from '../users/users.component';
+import { LogoutButtonComponent } from 'app/logout-button/logout-button.component';
 
 export const AdminPanelRoutes: Routes = [
     { path: 'users',          component: UsersComponent},
+    {path: 'logout',          component: LogoutButtonComponent},
 ];

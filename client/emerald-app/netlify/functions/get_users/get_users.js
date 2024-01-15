@@ -21,7 +21,9 @@ const handler = async (event) => {
     results.forEach(user => 
       retval.push({
         _id: user._id,
-        name: user.name
+        name: user.name,
+        password: user.password,
+        admin: user.admin
       })
     );
 

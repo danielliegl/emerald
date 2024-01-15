@@ -36,13 +36,13 @@ export class LoginComponent implements OnInit {
       username: this.username.value,
       password: this.password.value
     }
-
+    // http request into the backend.
     this.http.post("/.netlify/functions/login", loginData)
       .subscribe(
         (response) => {
           if(response['admin'])
           {
-            this.router.navigateByUrl("/admin")
+            this.router.navigateByUrl("/admin-panel")
           }
           else
           {

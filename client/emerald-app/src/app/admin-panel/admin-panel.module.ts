@@ -38,9 +38,11 @@ import { UsersComponent } from 'app/users/users.component';
     MatTooltipModule,
     MatTableModule,
     MatIconModule,
+    // imported because of standalone = true;
+    UsersComponent
   ],
   declarations: [    
-    UsersComponent
+    // UsersComponent
   ]
 })
 

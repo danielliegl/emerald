@@ -1,71 +1,97 @@
-// import { Component, OnInit , } from '@angular/core';
-// import {MatTableModule} from '@angular/material/table'
-
-// @Component({
-//   selector: 'app-users',
-//   templateUrl: './users.component.html',
-//   styleUrls: ['./users.component.scss']
-// })
-// export class UsersComponent implements OnInit {
-
-//   constructor() { }
-
-//   ngOnInit(): void {
-//   }
-
-// }
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, NgModule, OnInit, ViewChild} from '@angular/core';
 import def from 'ajv/dist/vocabularies/discriminator';
 import * as Chartist from 'chartist';
+import {MatCardModule} from "@angular/material/card";
+import {MatInputModule} from "@angular/material/input";
+import {RouterLink} from "@angular/router";
+import {MatButtonModule} from "@angular/material/button";
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { User } from './users';
+import { response } from 'express';
+import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
+import { Observable } from 'rxjs';
+import { UserInfo } from 'app/models/userinfo';
+import { UserService } from './users.services';
+
+
 
 @Component({
   selector: 'app-users',
+  standalone: true,
+  imports: [
+    MatCardModule,
+    MatInputModule,
+    RouterLink,
+    MatButtonModule,
+    ReactiveFormsModule,
+  ],
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-  cellColor: string = 'default-color'; // Initial color
-
-  toggle = true;
-
-  // Color Selection Flags
-  default = true;
-  pass = false;
-  fail = false;
-
+  user: User;
+  users: User[] = [];
+  [x: string]: any;
 
   @ViewChild('targetCell') targetCell!: ElementRef;
+  
+  constructor(private http: HttpClient, private router: Router, public userService: UserService) { }
 
-  constructor() { }
-  // changeColor() {
-  //   // Change the font color of the target cell
-  //   // this.cellColor = 'green'; // Change this to the color you want
-  // }
 
-  changeColor(cond: string) {
-    switch(cond){
-      case 'pass':
-        this.default = false;
-        this. pass = true;
-        this.fail = false;
-        break;
-      case 'fail':
-        this.default = false;
-        this.pass = false;
-        this.fail = true;
-        break;
-      default:
-        this.default = true;
-        this.pass = false;
-        this.fail = false;
-        break;
-    }
+  addUserForm = new FormGroup({
+    id: new FormControl('', [Validators.required]),
+    name: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required]),
+    admin: new FormControl('', [Validators.required]),
+  })
+
+  saveUser() {
+    // Here this.user is undefined ERROR
+    // this.user.id = this.addUserForm.get('id').value;
+    // this.user.name = this.addUserForm.get('name').value;
+    // this.user.password = this.addUserForm.get('password').value;
+    // this.user.admin = this.addUserForm.get('admin').value;
+
+    this.userService.saveUser(this.user).subscribe((response: any) => {
+      console.log(response);
+      this.users.push({ id: response.id, name: response.name, password: response.password, admin: response.admin });
+    });
   }
 
-  changeColorRed() {
-    // Change the font color of the target cell
-    // this.cellColor = 'red'; // Change this to the color you want
-    this.cellColor = '#DD5A5E';
+  saveUserTyped() {
+
+    // Here this.user is undefined ERROR
+    this.user.id = this.addUserForm.get('id').value;
+    this.user.name = this.addUserForm.get('name').value;
+    this.user.password = this.addUserForm.get('password').value;
+    this.user.admin = this.addUserForm.get('admin').value;
+
+    this.userService.saveUserTyped(this.user).subscribe((response: UserInfo) => {
+        console.log(response);
+        this.users.push({id: response.id, name: response.name, password: response.password, admin: response.admin });
+      });
+  }
+
+  // saveUser(user: User){
+  //   this.user = this.addUserForm.value;
+  //   this.userService.saveUserTyped(this.user).subscribe((response: UserInfo) => {
+  //     console.log(response)
+
+  //     this.users.push({id: response.id, name: response.name, password: response.password, admin: response.admin})
+  //   });
+  //   // UserService.saveUserTyped.http.post<any>('../.netlify/functions/get_users', user).subscribe((response: any) => {
+  //   //   console.log(response);
+  //   //   this.users.push({id: response.it, name: response.name, password: response.password, admin: response.admin});
+  //   };
+
+  // getUsers(): 
+  getUsers(){
+    this.http.post('../.netlify/functions/get_users', null).subscribe(response => {
+
+    })
   }
 
   startAnimationForLineChart(chart){
@@ -206,5 +232,4 @@ export class UsersComponent implements OnInit {
 
       // this.startAnimationForBarChart(websiteViewsChart);
   }
-
 }
