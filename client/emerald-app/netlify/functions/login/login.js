@@ -29,6 +29,7 @@ exports.handler = async (event) => {
 
     return({
       statusCode: 200,
+      body: JSON.stringify({admin: existing_user.admin}),
       headers: {
         'Set-Cookie': `token=${token}; HttpOnly; Max-Age=3600; Path=/; SameSite=Strict`,
         'Content-Type': 'application/json',

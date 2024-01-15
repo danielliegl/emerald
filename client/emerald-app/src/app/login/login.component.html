@@ -2,18 +2,15 @@
   <mat-card class="card">
     <mat-card-title>Login</mat-card-title>
     <mat-card-content>
-      <form>
-        <mat-form-field appearance="fill">
-          <input matInput placeholder="Username or Email">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <input matInput placeholder="Password" type="password">
-        </mat-form-field>
-        <div class="actions">
-          <button mat-raised-button color="primary" [routerLink]="['/admin']">Login</button>
-          <p class="register-link">Don't have an account? <a routerLink="/register">Register here</a></p>
-        </div>
-      </form>
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="Username or Email" [formControl]="username">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="Password" type="password" [formControl]="password">
+      </mat-form-field>
+      <div class="actions">
+        <button mat-raised-button color="primary" (click)="handleLogin()">Login</button>
+      </div>
     </mat-card-content>
   </mat-card>
 </div>
