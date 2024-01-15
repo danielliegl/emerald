@@ -1,0 +1,14 @@
+
+
+.study-table {
+  border: 2px solid lightgrey;
+  border-radius: 10px;
+  padding: 5px;
+}
+.finished-study {
+  background-color: greenyellow;
+}
+
+.status {
+  text-align: center;
+}
