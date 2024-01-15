@@ -5,21 +5,29 @@ import { RouterModule } from '@angular/router';
 import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { UserSidebarComponent } from 'app/user-sidebar/user-sidebar.component';
+import { AdminSidebarComponent } from 'app/admin-sidebar/admin-sidebar.component';
+
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
+
   ],
   declarations: [
     FooterComponent,
     NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    UserSidebarComponent,
+    AdminSidebarComponent,
   ],
   exports: [
     FooterComponent,
     NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    UserSidebarComponent,
+    AdminSidebarComponent
   ]
 })
 export class ComponentsModule { }

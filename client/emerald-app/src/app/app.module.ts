@@ -14,6 +14,7 @@ import { ProjectOwnerPanelComponent } from './project-owner-panel/project-owner-
 import { UserSidebarComponent } from './user-sidebar/user-sidebar.component';
 import { AdminSidebarComponent } from './admin-sidebar/admin-sidebar.component';
 import { UsersComponent } from './users/users.component';
+import { UserPanelComponent } from './user-panel/user-panel.component';
 
 @NgModule({
   imports: [
@@ -29,12 +30,11 @@ import { UsersComponent } from './users/users.component';
   declarations: [
     AppComponent,
     AdminLayoutComponent,
+
     AdminPanelComponent,
     ReviewerPanelComponent,
     ProjectOwnerPanelComponent,
-    UserSidebarComponent,
-    AdminSidebarComponent,
-    UsersComponent,
+    UserPanelComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]
