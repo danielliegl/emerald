@@ -56,7 +56,6 @@ export const AdminLayoutRoutes: Routes = [
     //     }]
     // }
     { path: 'reviewer',       component: ReviewerPanelComponent },
-    { path: 'dashboard',      component: DashboardComponent },
     { path: 'guidelines',     component: GuidelinesComponent },
     { path: 'test',           component: TestComponent },
     { path: 'user-profile',   component: UserProfileComponent },

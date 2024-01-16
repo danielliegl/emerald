@@ -1,0 +1,23 @@
+
+
+.study-table {
+  border: 2px solid lightgrey;
+  border-radius: 10px;
+  padding: 5px;
+}
+.finished-study {
+  background-color: #5cb85c;
+}
+
+.status {
+  text-align: center;
+}
+.create-study{
+  text-align: right;
+}
+.button-wrapper{
+  text-align: end;
+}
+.button-width {
+  min-width: 180px;
+}

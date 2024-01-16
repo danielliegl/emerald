@@ -9,8 +9,8 @@ import { ReviewerPanelComponent } from './reviewer-panel/reviewer-panel.componen
 import { ProjectOwnerPanelComponent } from './project-owner-panel/project-owner-panel.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
-import { UsersComponent } from './users/users.component';
 import { UserPanelComponent } from './user-panel/user-panel.component';
+import {UserPanelModule} from "./user-panel/user-panel.module";
 
 // Here the routing via URL links happens
 const routes: Routes =[
@@ -19,10 +19,14 @@ const routes: Routes =[
   // {path: 'reviewer-panel', component: ReviewerPanelComponent },
   // {path: 'project-owner-panel', component: ProjectOwnerPanelComponent},
   // Panels for the Admin and Users (Project-Owner and Reviewer)
-  {path: 'user-panel', component: UserPanelComponent},
-  // {path: 'admin-panel', component: AdminPanelComponent},
+  {path: 'user-panel', component: UserPanelComponent,
+    children: [{
+      path: 'user-panel',
+      loadChildren: () => import('./user-panel/user-panel.module').then(m => m.UserPanelModule)
+    }]
+  },
 
-  // Admin Panel 
+  // Admin Panel
   {path: 'admin-panel', component: AdminPanelComponent,
     children: [{
       path: 'admin-panel',
