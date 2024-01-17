@@ -22,12 +22,7 @@ const handler = async (event) => {
     // Check if the user exists in the database
     const existing_user = await users.findOne({ name: username });
 
-    if (existing_user) {
-      return { statusCode: 401, body: JSON.stringify({ message: 'User already exists' }) };
-    }
 
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10); // Use 10 rounds of salt
 
     const newUser = {
       name: username,
@@ -35,8 +30,23 @@ const handler = async (event) => {
       admin: admin
     };
 
-    // Insert the user into the database
-    await users.insertOne(newUser);
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10); // Use 10 rounds of salt
+
+    if (existing_user) {
+      await collection.replaceOne(
+        {
+          _id: existing_user._id,
+          newUser,
+        }
+      )
+    }
+    else
+    {
+      // Insert the user into the database
+      await users.insertOne(newUser);
+    }
+
 
     return { statusCode: 200, body: JSON.stringify({ message: 'Register User successful' }) };
   } catch (error) {
