@@ -36,50 +36,91 @@ Example:
 ## User Authentication
 ### Register User
 Endpoint: `/.netlify/functions/register`
-
 Method: POST
-
 Parameters:
 
 | Parameter | Type | Description |
 | ---- | ---- | ---- |
 | `username` | String | Username for new user (required) |
 | `password` | String | Password for new user (required) |
+### Login
+Endpoint: `/.netlify/functions/login`
+Method: POST
+Parameters:
+
+| Parameter | Type | Description |
+| ---- | ---- | ---- |
+| `username` | String | Username (required) |
+| `password` | String | Password (required) |
+
+Successful Call sets cookie, which authenticates
+
+### Logout
+Endpoint: `/.netlify/functions/get`
+Method: GET
+Parameters:
+
+Successful Call deletes auth cookie.
+
+### Get Users
+Endpoint: `/.netlify/functions/get`
+Method: GET
+Needs Auth cookie
+Parameters:
+
+Returns:
+
+```
+[
+	{
+		"_id": "6599910107bf61b1fee3463f",
+		"name": "dliegl",
+		"admin": true
+	},
+	{
+		"_id": "65a4266d891b30da14e79cdc",
+		"name": "admin",
+		"admin": true
+	}
+]
+```
+
+
 
 ## Manipulating Scripts
 
-### Get Scripts
-Gets all available scripts.
+### Get User Scripts
+Endpoint: `/.netlify/functions/get_user_scripts`
+Method: GET
+Needs AUTH cookie
 
-Endpoint: `/.netlify/functions/get_scripts`
+Returns:
 
-Method: POST
-
-Parameters: none
-
-Returns Script names and ID as JSON on Success:
 ```
-200 OK
-[
-    {
-        "_id": "65953e22645e0f0216baf95f",
-        "name": "Requirements List"
-    },
-    {
-        "_id": "6599af3edd1541bd96105dc0",
-        "name": "New Script"
-    },
-    {
-        "_id": "6599afcd319a788ac3468f7b",
-        "name": "Edited agAIN"
-    }
-]
+{
+	"user_scripts": [
+		{
+			"id": "6599af3edd1541bd96105dc0",
+			"name": "New Script"
+		}
+	],
+	"assigned_scripts": [
+		{
+			id": "65953e22645e0f0216baf95f",
+			"name": "Requirements List"
+		},
+		{
+			"id": "6599afcd319a788ac3468f7b",
+			"name": "Edited agAIN"
+		}
+	]
+}
 ```
+
+
 ### Load Script
 Endpoint: `/.netlify/functions/load_script`
-
 Method: POST
-
 Parameters:
 
 | Parameter | Type | Description |
@@ -98,7 +139,7 @@ Returns Script data as JSON on Success:
 		"65953fb2645e0f0216baf960"
 	],
 	"requirements": [
-		{
+		{a
 			"name": "Is very good.",
 			"values": [
 				{
@@ -121,9 +162,7 @@ No Script with ID 65953e22645e0f0216ba295f found.
 
 ### Create Script
 Endpoint: `/.netlify/functions/create_script`
-
 Method: POST
-
 Parameters:
 
 | Parameter | Type | Description |
@@ -150,9 +189,7 @@ Returns on Success:
 Replaces an existing Script's data with new modified data.
 
 Endpoint: `/.netlify/functions/edit_script`
-
 Method: POST
-
 Parameters:
 
 | Parameter | Type | Description |
@@ -175,9 +212,7 @@ Returns on Success:
 ```
 ### Delete Script
 Endpoint: `/.netlify/functions/delete_script`
-
 Method: POST
-
 Parameters:
 
 | Parameter | Type | Description |
@@ -195,3 +230,24 @@ Return when Bad ID is given:
 400 Bad Request
 No script found with given ID.
 ```
+
+
+### Edit Requirement
+
+Call for users to set a value of a criterion within a script
+
+Endpoint: `/.netlify/functions/edit_requirement_value`
+Method: POST
+JSON Body:
+
+
+```
+{
+	"id": "65953e22645e0f0216baf95f", # id of script
+		"requirement": {
+		"name" : "test",
+		"value": 5
+	}
+}
+```
+
