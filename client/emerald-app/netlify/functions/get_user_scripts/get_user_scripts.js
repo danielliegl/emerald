@@ -5,7 +5,6 @@ const { verify_jwt } = require("../verify_token");
 const handler = async (event) => {
   try {
     const decodedUser = verify_jwt(event.headers)
-    console.log(decodedUser)
     const user_id = new ObjectId(decodedUser.user_id)
 
     const database = await connectToDatabase()

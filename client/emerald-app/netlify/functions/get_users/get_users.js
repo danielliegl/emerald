@@ -6,14 +6,6 @@ const handler = async (event) => {
     const decodedUser = verify_jwt(event.headers)
 
 
-    if(!decodedUser.admin)
-    {
-      return{
-        statusCode: 401
-      }
-    }
-
-
     const database = await connectToDatabase()
     const collection = database.collection(process.env.MONGODB_COLLECTION_USERS);
     const results = await collection.find({}).toArray();
@@ -22,7 +14,6 @@ const handler = async (event) => {
       retval.push({
         _id: user._id,
         name: user.name,
-        password: user.password,
         admin: user.admin
       })
     );
