@@ -2,9 +2,9 @@
   <div class="container-fluid">
     <mat-card>
       <h2>Enter new User</h2>
-      <form [formGroup]="addUserForm" (ngSubmit)="this.saveUser()">
+      <form [formGroup]="addUserForm" (ngSubmit)="this.registerUser()">
         <mat-form-field>
-          <input matInput placeholder="ID" formControlName="id" />
+          <input matInput placeholder="ID" formControlName="id"/>
         </mat-form-field>
         <br />
         <mat-form-field>

@@ -48,18 +48,18 @@ export class UsersComponent implements OnInit {
     admin: new FormControl('', [Validators.required]),
   })
 
-  saveUser() {
+  //saveUser() {
     // Here this.user is undefined ERROR
     // this.user.id = this.addUserForm.get('id').value;
     // this.user.name = this.addUserForm.get('name').value;
     // this.user.password = this.addUserForm.get('password').value;
     // this.user.admin = this.addUserForm.get('admin').value;
 
-    this.userService.saveUser(this.user).subscribe((response: any) => {
-      console.log(response);
-      this.users.push({ id: response.id, name: response.name, password: response.password, admin: response.admin });
-    });
-  }
+//    this.userService.saveUserOld(this.user).subscribe((response: any) => {
+  //    console.log(response);
+    //  this.users.push({ id: response.id, name: response.name, password: response.password, admin: response.admin });
+    //});
+ // }
 
   saveUserTyped() {
 
@@ -73,6 +73,24 @@ export class UsersComponent implements OnInit {
         console.log(response);
         this.users.push({id: response.id, name: response.name, password: response.password, admin: response.admin });
       });
+  }
+
+
+  registerUser() {
+    const url = '../.netlify/functions/register';
+
+    const body = {
+      username: this.addUserForm.get('name').value,
+      password: this.addUserForm.get('password').value,
+      admin: this.addUserForm.get('admin').value
+    }
+
+    this.http.post<any>(url, body)
+      .subscribe(
+        (response) => {
+          console.log(response)
+        }
+      )
   }
 
   // saveUser(user: User){

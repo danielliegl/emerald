@@ -14,10 +14,16 @@ import { Observable } from 'rxjs';
 export class UserService {
   constructor(private http: HttpClient) {}
 
-  public saveUser(user: User): Observable<any> {
+  saveUserOld(user: User) {
     console.log('HEY');
     const url = '../.netlify/functions/get_users';
-    return this.http.post<any>(url, user);
+    this.http.post<any>(url, user)
+      .subscribe(
+        (response) => {
+          console.log(response)
+        }
+      )
+        
   }
 
   public saveUserTyped(user: User): Observable<UserInfo> {

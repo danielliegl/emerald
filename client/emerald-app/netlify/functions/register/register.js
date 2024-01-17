@@ -5,7 +5,7 @@ require('dotenv').config();
 
 const handler = async (event) => {
   try {
-    const decodedUser = verify_jwt(event.handler)
+    const decodedUser = verify_jwt(event.headers)
     if(!decodedUser.admin)
     {
       return {
@@ -17,7 +17,7 @@ const handler = async (event) => {
     const users = db.collection(process.env.MONGODB_COLLECTION_USERS); // Assuming a collection named 'users'
 
     // Parse the incoming request body for credentials
-    const { username, password } = JSON.parse(event.body);
+    const { username, password, admin } = JSON.parse(event.body);
 
     // Check if the user exists in the database
     const existing_user = await users.findOne({ name: username });
@@ -31,7 +31,8 @@ const handler = async (event) => {
 
     const newUser = {
       name: username,
-      password: hashedPassword
+      password: hashedPassword,
+      admin: admin
     };
 
     // Insert the user into the database
