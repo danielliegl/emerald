@@ -34,7 +34,7 @@ const routes: Routes =[
     }]
   },
   {path: 'admin-dashboard', component: AdminDashboardComponent},
-  // {path: 'users', component: UsersComponent},
+  // {path: 'users', component: ManageUsersComponent},
   // What is happening.
   {path: 'admin', component: AdminLayoutComponent,
     children: [{

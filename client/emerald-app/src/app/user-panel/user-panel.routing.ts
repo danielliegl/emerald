@@ -10,7 +10,7 @@ import { NotificationsComponent } from '../notifications/notifications.component
 import {GuidelinesComponent} from "../guidelines/guidelines.component";
 import {TestComponent} from "../test/test.component";
 import {ReviewerPanelComponent} from "../reviewer-panel/reviewer-panel.component";
-import { UsersComponent } from '../users/users.component';
+import { ManageUsersComponent } from '../manage-users/manage-users.component';
 
 export const UserPanelRouting: Routes = [
     { path: 'dashboard',          component: DashboardComponent},

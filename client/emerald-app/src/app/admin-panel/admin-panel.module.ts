@@ -22,7 +22,7 @@ import {TestComponent} from "../test/test.component";
 import {MatTableModule} from "@angular/material/table";
 import {MatIconModule} from "@angular/material/icon";
 
-import { UsersComponent } from 'app/users/users.component';
+import { ManageUsersComponent } from 'app/manage-users/manage-users.component';
 
 @NgModule({
   imports: [
@@ -39,10 +39,10 @@ import { UsersComponent } from 'app/users/users.component';
     MatTableModule,
     MatIconModule,
     // imported because of standalone = true;
-    UsersComponent
+    ManageUsersComponent
   ],
   declarations: [    
-    // UsersComponent
+    // ManageUsersComponent
   ]
 })
 

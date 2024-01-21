@@ -26,6 +26,14 @@ export class UserService {
         
   }
 
+  doSomething(): Observable<UserInfo[]> {
+    // commonly something like:
+    // return this.httpClient.get('https://example.org/rest-api/items/');
+
+    
+    return;
+  }
+
   public saveUserTyped(user: User): Observable<UserInfo> {
     console.log('HEY');
     const url = '../.netlify/functions/get_users';
