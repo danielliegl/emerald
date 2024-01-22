@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {FormsModule, FormControl} from '@angular/forms';
+import {FormsModule, FormControl, FormBuilder, Form, FormGroup} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { HttpClient } from '@angular/common/http';
 import {MatSelectModule} from '@angular/material/select';
-
+import { NgZone } from '@angular/core';
 
 @Component({
   selector: 'app-create-study',
@@ -17,18 +18,26 @@ import {MatSelectModule} from '@angular/material/select';
     MatFormFieldModule,
     FormsModule,
     MatCheckboxModule,
-    MatSelectModule
+    MatSelectModule,
+    ReactiveFormsModule
   ]
 })
 export class CreateStudyComponent implements OnInit {
   public userList: any[] = [];
-  assignedUsers = new FormControl([])
+  createStudyForm: FormGroup;
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.fetchUsers()
+    this.createStudyForm = this.fb.group({
+      name: '',
+      public: true,
+      description: "",
+      assignedUsers: [],
+      requirements: [],
+    })
   }
 
   fetchUsers(){

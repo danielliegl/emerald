@@ -2,35 +2,40 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-10 col-md-12">
-        <div class="card">
-          <div class="card-header card-header-tabs card-header-success">
-            <div class="nav-tabs-navigation">
-              <div class="nav-tabs-wrapper">
-                <span class="nav-tabs-title">
-                  <input matInput placeholder="Study Name">
-                </span>
+        <form [formGroup]="createStudyForm">
+          <div class="card">
+            <div class="card-header card-header-tabs card-header-success">
+              <div class="nav-tabs-navigation">
+                <div class="nav-tabs-wrapper">
+                  <span class="nav-tabs-title">
+                    <input matInput placeholder="Study Name" formControlName="name">
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="card-body">
-            <div class="tab-content">
-              <div class="tab-pane active" id="profile">
-                <mat-form-field appearance="fill">
-                  <textarea matInput placeholder="Description"></textarea>
-                </mat-form-field>
-                <mat-checkbox>Public</mat-checkbox>
-                <mat-select>
-                  <mat-option *ngFor="let user of userList" [value]="user">
-                    {{ user.name }}
-                  </mat-option>
-                </mat-select>
-                <div class="button-wrapper">
-                  <button mat-raised-button class="button-width"  color="primary">Create Study</button>
+            <div class="card-body">
+              <div class="tab-content">
+                <div class="tab-pane active" id="profile">
+                  <mat-form-field appearance="fill">
+                    <textarea matInput placeholder="Description" formControlName="description"></textarea>
+                  </mat-form-field>
+                  <mat-form-field>
+                    <mat-checkbox formControlName="public">Public</mat-checkbox>
+                  </mat-form-field>
+                  <mat-form-field>
+                    <mat-label>Assigned Users</mat-label>
+                    <mat-select formControlName="assignedUsers" multiple>
+                      <mat-option *ngFor="let user of userList" [value]="user">{{user.name}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <div class="button-wrapper">
+                    <button mat-raised-button class="button-width"  color="primary">Create Study</button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>
