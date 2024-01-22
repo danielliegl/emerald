@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {Router} from "@angular/router";
+import {UserService} from "../users/users.services";
 
 @Component({
   selector: 'app-user-panel',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserPanelComponent implements OnInit {
 
-  constructor() { }
+  constructor(private http: HttpClient, private router: Router, public userService: UserService) { }
 
   ngOnInit(): void {
+  }
+
+  getUsers(){
+    this.http.post('../.netlify/functions/get_users', null).subscribe((response) => {
+      console.log(response)
+    })
   }
 
 }

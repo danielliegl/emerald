@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as Chartist from 'chartist';
+import {HttpClient} from "@angular/common/http";
+import {Router} from "@angular/router";
+import {UserService} from "../users/users.services";
 
 @Component({
   selector: 'app-dashboard',
@@ -7,8 +10,10 @@ import * as Chartist from 'chartist';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
-  constructor() { }
+  studies: any = null;
+  yourStudies: any[] = [];
+  assignedStudies: any[] = []
+  constructor(private http: HttpClient, private router: Router, public userService: UserService) { }
   startAnimationForLineChart(chart){
       let seq: any, delays: any, durations: any;
       seq = 0;
@@ -42,6 +47,21 @@ export class DashboardComponent implements OnInit {
 
       seq = 0;
   };
+  getUsers(){
+    this.http.post('../.netlify/functions/create_script', null).subscribe((response) => {
+      console.log(response)
+    })
+  }
+  getScript(){
+    const scriptData = {
+      id: "65ae4354838db147163a47a4"
+    }
+    this.http.post('../.netlify/functions/get_user_scripts', null).subscribe((response) => {
+      this.studies = response;
+      console.log(this.studies)
+      //this.studies = null;
+    })
+  }
   startAnimationForBarChart(chart){
       let seq2: any, delays2: any, durations2: any;
 
@@ -67,7 +87,7 @@ export class DashboardComponent implements OnInit {
   };
   ngOnInit() {
       /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
-
+      this.getScript();
       const dataDailySalesChart: any = {
           labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
           series: [
@@ -144,7 +164,7 @@ export class DashboardComponent implements OnInit {
       var websiteViewsChart = new Chartist.Bar('#websiteViewsChart', datawebsiteViewsChart, optionswebsiteViewsChart, responsiveOptions);
 
       //start animation for the Emails Subscription Chart
-      
+
       // this.startAnimationForBarChart(websiteViewsChart);
   }
 

@@ -15,7 +15,8 @@
               <div class="tab-pane active" id="profile">
                 <table class="table">
                   <tbody>
-                  <tr class="study-table">
+                  <tr class="study-table" routerLink="/user-panel/user-panel/study-details/{{studies.user_scripts[0].id}}">
+                    <td>{{studies.user_scripts[0].name}}</td>
                     <td><strong>Study Name</strong></td>
                     <td class="status">Status:  Running</td>
                     <td class="status">Users finished: 3/4</td>
@@ -38,7 +39,7 @@
                   </tbody>
                 </table>
                 <div class="button-wrapper">
-                  <button mat-raised-button class="button-width"  color="primary" [routerLink]="['/admin-panel']">Create Study</button>
+                  <button mat-raised-button class="button-width" (click)="getUsers()"  color="primary">Create Study</button>
                 </div>
               </div>
           </div>

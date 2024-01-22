@@ -16,6 +16,7 @@ import { UserSidebarComponent } from './user-sidebar/user-sidebar.component';
 import { AdminSidebarComponent } from './admin-sidebar/admin-sidebar.component';
 import { UsersComponent } from './users/users.component';
 import { UserPanelComponent } from './user-panel/user-panel.component';
+import { StudyDetailsComponent } from './study-details/study-details.component';
 
 @NgModule({
   imports: [

@@ -11,7 +11,9 @@ import {GuidelinesComponent} from "../guidelines/guidelines.component";
 import {TestComponent} from "../test/test.component";
 import {ReviewerPanelComponent} from "../reviewer-panel/reviewer-panel.component";
 import { UsersComponent } from '../users/users.component';
+import {StudyDetailsComponent} from "../study-details/study-details.component";
 
 export const UserPanelRouting: Routes = [
     { path: 'dashboard',          component: DashboardComponent},
+    { path: 'study-details/:id',  component: StudyDetailsComponent},
 ];

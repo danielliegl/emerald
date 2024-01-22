@@ -36,8 +36,9 @@ export class UsersComponent implements OnInit {
   users: User[] = [];
   [x: string]: any;
 
-  @ViewChild('targetCell') targetCell!: ElementRef;
-  
+  @ViewChild('target' +
+    'Cell') targetCell!: ElementRef;
+
   constructor(private http: HttpClient, private router: Router, public userService: UserService) { }
 
 
@@ -105,10 +106,10 @@ export class UsersComponent implements OnInit {
   //   //   this.users.push({id: response.it, name: response.name, password: response.password, admin: response.admin});
   //   };
 
-  // getUsers(): 
+  // getUsers():
   getUsers(){
-    this.http.post('../.netlify/functions/get_users', null).subscribe(response => {
-
+    this.http.post('../.netlify/functions/get_users', null).subscribe((response) => {
+      console.log(response)
     })
   }
 

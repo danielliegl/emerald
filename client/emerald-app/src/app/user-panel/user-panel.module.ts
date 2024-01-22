@@ -13,6 +13,7 @@ import {MatTableModule} from "@angular/material/table";
 import {MatIconModule} from "@angular/material/icon";
 import { UsersComponent } from 'app/users/users.component';
 import {DashboardComponent} from "../dashboard/dashboard.component";
+import {StudyDetailsComponent} from "../study-details/study-details.component";
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import {DashboardComponent} from "../dashboard/dashboard.component";
     MatIconModule,
   ],
   declarations: [
-    DashboardComponent
+    DashboardComponent,
+    StudyDetailsComponent
   ]
 })
 
