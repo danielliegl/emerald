@@ -16,6 +16,7 @@ import { UserSidebarComponent } from './user-sidebar/user-sidebar.component';
 import { AdminSidebarComponent } from './admin-sidebar/admin-sidebar.component';
 import { ManageUsersComponent } from './manage-users/manage-users.component';
 import { UserPanelComponent } from './user-panel/user-panel.component';
+import { CreateStudyComponent } from './create-study/create-study.component';
 
 import { MatPaginatorModule } from '@angular/material/paginator';
 
@@ -29,13 +30,13 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     RouterModule,
     AppRoutingModule,
     LoginComponent,
+    CreateStudyComponent,
     MatPaginatorModule,
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     LogoutButtonComponent,
-
     AdminPanelComponent,
     ReviewerPanelComponent,
     ProjectOwnerPanelComponent,
