@@ -31,13 +31,10 @@
           </mat-form-field>
           <br />
           <!-- ADMIN Field -->
-
-          <!-- <input matInput placeholder="Admin" formControlName="admin" /> -->
-          <!-- <mat-checkbox [checked]="this.admin" FormControlName="admin">Admin</mat-checkbox> -->
-          <ng-container>
-            <mat-checkbox [formControlName]="admin">Admin</mat-checkbox>
-          </ng-container>
+          <input type="checkbox" placeholder="Admin" formControlName="admin">
+          <mat-hint> Admin</mat-hint>
           <br />
+          <span layout="row"><hr flex/></span>
           <button [disabled]="!addUserForm.valid" mat-raised-button type="submit">
             Confirm
           </button>
@@ -116,7 +113,8 @@
             
           </mat-table>
           <br />
-          <button class="button" mat-raised-button matTooltip="Click to REfresh" color="primary" (click)="getUsers()">Refresh</button>
+          <span layout="row"><hr flex/></span>
+          <button class="button" mat-raised-button matTooltip="Click to Refresh" color="primary" (click)="getUsers()">Refresh</button>
           <!-- Page Count -->
           <!-- <mat-paginator [pageSize]="10" [pageSizeOptions]="5,10,20,25,50" [showFirstLastButtons]="true"></mat-paginator> -->
         </div>
