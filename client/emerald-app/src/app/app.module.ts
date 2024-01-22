@@ -14,9 +14,11 @@ import { ReviewerPanelComponent } from './reviewer-panel/reviewer-panel.componen
 import { ProjectOwnerPanelComponent } from './project-owner-panel/project-owner-panel.component';
 import { UserSidebarComponent } from './user-sidebar/user-sidebar.component';
 import { AdminSidebarComponent } from './admin-sidebar/admin-sidebar.component';
-import { UsersComponent } from './users/users.component';
+import { ManageUsersComponent } from './manage-users/manage-users.component';
 import { UserPanelComponent } from './user-panel/user-panel.component';
 import { CreateStudyComponent } from './create-study/create-study.component';
+
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   imports: [
@@ -29,6 +31,7 @@ import { CreateStudyComponent } from './create-study/create-study.component';
     AppRoutingModule,
     LoginComponent,
     CreateStudyComponent,
+    MatPaginatorModule,
   ],
   declarations: [
     AppComponent,

@@ -12,8 +12,8 @@ const handler = async (event) => {
     var retval = []
     results.forEach(user => 
       retval.push({
-        _id: user._id,
-        name: user.name,
+        id: user._id,
+        username: user.name,
         admin: user.admin
       })
     );

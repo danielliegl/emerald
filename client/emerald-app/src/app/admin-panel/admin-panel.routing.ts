@@ -10,10 +10,12 @@ import { NotificationsComponent } from '../notifications/notifications.component
 import {GuidelinesComponent} from "../guidelines/guidelines.component";
 import {TestComponent} from "../test/test.component";
 import {ReviewerPanelComponent} from "../reviewer-panel/reviewer-panel.component";
-import { UsersComponent } from '../users/users.component';
+import { ManageUsersComponent } from '../manage-users/manage-users.component';
 import { LogoutButtonComponent } from 'app/logout-button/logout-button.component';
+import { LoginComponent } from 'app/login/login.component';
 
 export const AdminPanelRoutes: Routes = [
-    { path: 'users',          component: UsersComponent},
-    {path: 'logout',          component: LogoutButtonComponent},
+    { path: 'users',           component: ManageUsersComponent },
+    { path: 'logout',          component: LogoutButtonComponent },
+    { path: 'login', redirectTo: '/login',           component: LoginComponent }
 ];

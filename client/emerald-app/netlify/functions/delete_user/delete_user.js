@@ -27,7 +27,7 @@ const handler = async (event) => {
         }
     }
     
-    const found_user = await collection.findOne({_id: user_id})
+    const found_user = await collection.findOne({id: user_id})
     
     if(!found_script)
     {
@@ -40,7 +40,7 @@ const handler = async (event) => {
     const username = found_user.name
 
     await collection.deleteOne({
-        _id: new ObjectId(user_id)
+        id: new ObjectId(user_id)
     })
 
     return {

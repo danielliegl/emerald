@@ -11,7 +11,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
 import {MatTableModule} from "@angular/material/table";
 import {MatIconModule} from "@angular/material/icon";
-import { UsersComponent } from 'app/users/users.component';
+import { ManageUsersComponent } from 'app/manage-users/manage-users.component';
 import {DashboardComponent} from "../dashboard/dashboard.component";
 
 @NgModule({
