@@ -19,7 +19,7 @@ export class LogoutButtonComponent implements OnInit {
 
   handleLogout(): void {
     this.http.get("/.netlify/functions/logout")
-    location.href = '/login';
+    location.href = '#/login';
   }
 
 }
