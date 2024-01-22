@@ -1,0 +1,124 @@
+<div class="container">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="card">
+        <!-- Title der Tabelle -->
+      <div class="card-header card-header-tabs card-header-success">
+        <div class="nav-tabs-navigation">
+          <div class="nav-tabs-wrapper">
+            <span class="nav-tabs-title">Add new User</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        
+        <form [formGroup]="addUserForm" (ngSubmit)="this.registerUser()">
+          
+          <!-- ID Field -->
+          <!-- <mat-form-field>
+            <input matInput placeholder="ID" formControlName="id" />
+          </mat-form-field>
+          <br /> -->
+
+          <!-- USERNAME Field -->
+          <mat-form-field>
+            <input matInput placeholder="User Name" formControlName="username" />
+          </mat-form-field>
+          <br />
+          <!-- PASSWORD Field -->
+          <mat-form-field>
+            <input matInput placeholder="Password" formControlName="password" />
+          </mat-form-field>
+          <br />
+          <!-- ADMIN Field -->
+          <input type="checkbox" placeholder="Admin" formControlName="admin">
+          <mat-hint> Admin</mat-hint>
+          <br />
+          <span layout="row"><hr flex/></span>
+          <button [disabled]="!addUserForm.valid" mat-raised-button type="submit">
+            Confirm
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+    <div class="row">
+      <div class="card">
+        <!-- <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+                <mat-spinner></mat-spinner>
+            </div> -->
+        <!-- Title der Tabelle -->
+        <div class="card-header card-header-tabs card-header-success">
+          <div class="nav-tabs-navigation">
+            <div class="nav-tabs-wrapper">
+              <span class="nav-tabs-title">Registered Users:</span>
+            </div>
+          </div>
+        </div>
+        <!-- Inhalt der Tabelle -->
+        <div class="card-body">
+          <!-- Filter Feld, um nach Usern zu suchen -->
+          <mat-form-field>
+            <mat-label>Filter Users</mat-label>
+            <input matInput type="text" [(ngModel)]="filterValue"
+          (blur)="filterProduct(filterValue)" placeholder="Search username">
+          </mat-form-field>
+          
+          <!-- Angabe der Dynamisch geladenen Daten -->
+          <mat-table [dataSource]="dataSource">
+
+            <!-- Name of the FIRST Column -->
+            <ng-container matColumnDef="id">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+              <mat-cell *matCellDef="let elem"> {{elem.id}}</mat-cell>
+            </ng-container>
+            
+            <!-- Name of the SECOND Column -->
+            <ng-container matColumnDef="username">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Username</mat-header-cell>
+              <mat-cell *matCellDef="let elem"> {{elem.username}}</mat-cell>
+            </ng-container>
+
+            <!-- Name of the THIRD Column -->
+            <!-- <ng-container matColumnDef="admin">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Admin</mat-header-cell>
+              <mat-cell *matCellDef="let elem"> {{elem.admin}}</mat-cell>
+            </ng-container> -->
+
+            <ng-container matColumnDef="admin">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Admin</mat-header-cell>
+              <mat-cell *matCellDef="let elem"> {{elem.admin ? '&#10003;' : '&#10005;'}}</mat-cell>
+            </ng-container>
+
+            <!-- Columns for the DELETE and MODIFY Functions -->
+            
+            <!-- <ng-container matColumnDef="edit">
+              <mat-header-cell *matHeaderCellDef> Edit </mat-header-cell>
+              <mat-cell *matCellDef="let element"> <button mat-icon-button matTooltip="Click to Edit"
+                  color="primary" (click)="edit(element)">
+                  <mat-icon>edit</mat-icon>
+                </button> </mat-cell>
+            </ng-container> -->
+
+            <ng-container matColumnDef="delete">
+              <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+              <mat-cell *matCellDef="let element"> <button mat-icon-button matTooltip="Click to Delete"
+                  (click)="deleteUser(element.id)" color="warn">
+                  <mat-icon>delete</mat-icon>
+                </button> </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: columnsToDisplay"></mat-row>
+            
+          </mat-table>
+          <br />
+          <span layout="row"><hr flex/></span>
+          <button class="button" mat-raised-button matTooltip="Click to Refresh" color="primary" (click)="getUsers()">Refresh</button>
+          <!-- Page Count -->
+          <!-- <mat-paginator [pageSize]="10" [pageSizeOptions]="5,10,20,25,50" [showFirstLastButtons]="true"></mat-paginator> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

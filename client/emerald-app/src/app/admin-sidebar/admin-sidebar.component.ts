@@ -11,8 +11,9 @@ declare interface RouteInfo {
 export const ROUTES: RouteInfo[] = [
     // { path: '/admin/admin-dashboard/dashboard', title: 'Dashboard',  icon: 'dashboard', class: '' },
     // { path: '/admin/admin-dashboard/guidelines', title: 'Guidelines',  icon: 'dashboard', class: '' },
-    { path: '/admin-panel/admin-panel/users', title: 'Manage Users',  icon:'person', class: '' },
-    { path: '/admin-panel/admin-panel/logout', title: 'Logout',  icon:'', class: '' },
+    // person icon
+    { path: '/admin-panel/admin-panel/users', title: 'Manage Users',  icon:'assignment_ind', class: '' },
+    { path: '/admin-panel/admin-panel/logout', title: 'Logout',  icon:'logout', class: '' },
 ];
 
 @Component({

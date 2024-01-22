@@ -22,7 +22,8 @@ const handler = async (event) => {
     // Check if the user exists in the database
     const existing_user = await users.findOne({ name: username });
 
-
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10); // Use 10 rounds of salt
 
     const newUser = {
       name: username,
@@ -30,8 +31,7 @@ const handler = async (event) => {
       admin: admin
     };
 
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10); // Use 10 rounds of salt
+    
 
     if (existing_user) {
       await collection.replaceOne(
