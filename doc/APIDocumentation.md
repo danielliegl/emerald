@@ -98,22 +98,24 @@ Returns:
 
 ```
 {
-	"user_scripts": [
-		{
-			"id": "6599af3edd1541bd96105dc0",
-			"name": "New Script"
-		}
-	],
-	"assigned_scripts": [
-		{
-			id": "65953e22645e0f0216baf95f",
-			"name": "Requirements List"
-		},
-		{
-			"id": "6599afcd319a788ac3468f7b",
-			"name": "Edited agAIN"
-		}
-	]
+    "user_scripts": [
+        {
+            "id": "6599af3edd1541bd96105dc0",
+            "name": "New Script"
+        },
+        {
+            "id": "65ae4354838db147163a47a4",
+            "name": "Requirements List"
+        }
+    ],
+    "assigned_scripts": [
+        {
+            "id": "65953e22645e0f0216baf95f",
+            "name": "Requirements List",
+            "due_date": "2024-04-23T00:00:00.000Z",
+            "owner_name": "Fabian"
+        }
+    ]
 }
 ```
 
@@ -139,7 +141,7 @@ Returns Script data as JSON on Success:
 		"65953fb2645e0f0216baf960"
 	],
 	"requirements": [
-		{a
+		{
 			"name": "Is very good.",
 			"values": [
 				{
@@ -238,7 +240,7 @@ Call for users to set a value of a criterion within a script
 
 Endpoint: `/.netlify/functions/edit_requirement_value`
 Method: POST
-JSON Body:
+JSON Body Example:
 
 
 ```
@@ -246,7 +248,7 @@ JSON Body:
 	"id": "65953e22645e0f0216baf95f", # id of script
 		"requirement": {
 		"name" : "test",
-		"value": 5
+		"value": true
 	}
 }
 ```
