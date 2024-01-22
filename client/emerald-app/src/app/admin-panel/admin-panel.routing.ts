@@ -17,5 +17,5 @@ import { LoginComponent } from 'app/login/login.component';
 export const AdminPanelRoutes: Routes = [
     { path: 'users',           component: ManageUsersComponent },
     { path: 'logout',          component: LogoutButtonComponent },
-    { path: 'login', redirectTo: '/login',           component: LoginComponent }
+    { path: 'login',           component: LoginComponent }
 ];

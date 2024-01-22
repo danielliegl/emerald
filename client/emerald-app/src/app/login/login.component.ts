@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
           else
           {
             //TODO: change route to user panel
-            this.router.navigateByUrl("/")
+            this.router.navigateByUrl("/user-panel")
           }
         },
         (error) => {

@@ -14,7 +14,6 @@ import { response } from 'express';
 import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
 import { Observable } from 'rxjs';
 // import { UserInfo } from 'app/models/userinfo';
-import { UserService } from './manage-users.services';
 
 // Imports for the Table
 import {MatPaginator} from '@angular/material/paginator';
@@ -64,7 +63,7 @@ export class ManageUsersComponent implements OnInit {
 
   @ViewChild('targetCell') targetCell!: ElementRef;
   
-  constructor(private http: HttpClient, private router: Router, public userService: UserService) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
 
   addUserForm = new FormGroup({
@@ -90,7 +89,7 @@ export class ManageUsersComponent implements OnInit {
   // register users in the backend
   registerUser() {
     const url = '../.netlify/functions/register';
-    const newUsersArray = this.UserArray;
+    // const newUsersArray = this.UserArray;
 
     const body = {
       username: this.addUserForm.get('username').value,
@@ -133,10 +132,15 @@ export class ManageUsersComponent implements OnInit {
   }
 
   // Deletes Users.
-  deleteUser(user_id){
+  deleteUser(user_id: any){
     const url = '../.netlify/functions/delete_user';
     console.log(user_id)
-    this.http.post(url, user_id).subscribe(response => {
+    const id_object = {
+      id: user_id,
+    }
+
+    var body = JSON.stringify(id_object)
+    this.http.post(url, body).subscribe(response => {
       console.log('DELETE LOG')
       console.log(response)
     })
