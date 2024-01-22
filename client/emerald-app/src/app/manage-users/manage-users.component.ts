@@ -47,35 +47,6 @@ import {MatCheckboxModule} from '@angular/material/checkbox'
 })
 export class ManageUsersComponent implements OnInit {
 
-  // public USERS: UserInfo[] = [
-  //   {
-  //       id: 1,
-  //       username: 'Franz',
-  //       password: 'asdf',
-  //       admin: false
-  //   },
-  //   {
-  //     id: 2,
-  //     username: 'Manfred',
-  //     password: 'eicncnei',
-  //     admin: true
-  //   },
-  //   {
-  //     id: 3,
-  //     username: 'Bert',
-  //     password: 'ibinsdabert3',
-  //     admin: false
-  //   },
-  //   {
-  //     id: 4,
-  //     username: 'Gerhard',
-  //     password: 'gerhardgoeshard4real',
-  //     admin: true
-  //   },
-  // ]
-
-  checked = true;
-
   public UserArray: UserInfo[] = []
   public newUser: UserInfo
 
@@ -85,8 +56,6 @@ export class ManageUsersComponent implements OnInit {
   @ViewChild(MatSort, {}) sort: MatSort;
 
   // The Columns needed to display in the Registered Users Table.
-  // columnsToDisplay = ['id', 'username', 'admin']
-  // columnsToDisplay = ['id', 'username', 'admin', 'edit', 'delete']
   columnsToDisplay = ['id', 'username', 'admin', 'delete']
 
   user: User;
@@ -118,7 +87,7 @@ export class ManageUsersComponent implements OnInit {
     // this.dataSource.sort = this.sort;
   }
 
-  
+  // register users in the backend
   registerUser() {
     const url = '../.netlify/functions/register';
     const newUsersArray = this.UserArray;
@@ -136,13 +105,6 @@ export class ManageUsersComponent implements OnInit {
       password: this.addUserForm.get('password').value,
       admin: this.addUserForm.get('admin').value
     }
-    
-    // this.USERS.push(this.newUser)
-    // refresh the Table and update the new Data
-    // this.dataSource.data = this.USERS;
-    // this.USERS = [...newUsersArray]
-    // console.log(this.newUser)
-    // console.log(this.USERS)
 
     this.http.post<any>(url, body)
       .subscribe(
@@ -153,7 +115,7 @@ export class ManageUsersComponent implements OnInit {
     this.getUsers()
   }
 
-  // getUsers(): 
+  // Get the registered users from the backend.
   getUsers(){
     const body: UserInfo [] = []
     const url = '../.netlify/functions/get_users';
@@ -170,7 +132,7 @@ export class ManageUsersComponent implements OnInit {
     
   }
 
-  // Deletes Users
+  // Deletes Users.
   deleteUser(user_id){
     const url = '../.netlify/functions/delete_user';
     console.log(user_id)
@@ -181,6 +143,7 @@ export class ManageUsersComponent implements OnInit {
     this.getUsers()
   }
 
+  // Filtering the table accodingly
   filterProduct(value: string):void{
     this.dataSource.filter = value.trim().toLowerCase();
     this.serviceAPI.getDataByFilter(value).subscribe(response =>
