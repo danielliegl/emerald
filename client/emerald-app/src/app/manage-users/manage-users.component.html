@@ -31,9 +31,12 @@
           </mat-form-field>
           <br />
           <!-- ADMIN Field -->
-          <mat-form-field>
-            <input matInput placeholder="Admin" formControlName="admin" />
-          </mat-form-field>
+
+          <!-- <input matInput placeholder="Admin" formControlName="admin" /> -->
+          <!-- <mat-checkbox [checked]="this.admin" FormControlName="admin">Admin</mat-checkbox> -->
+          <ng-container>
+            <mat-checkbox [formControlName]="admin">Admin</mat-checkbox>
+          </ng-container>
           <br />
           <button [disabled]="!addUserForm.valid" mat-raised-button type="submit">
             Confirm
@@ -80,9 +83,14 @@
             </ng-container>
 
             <!-- Name of the THIRD Column -->
-            <ng-container matColumnDef="admin">
+            <!-- <ng-container matColumnDef="admin">
               <mat-header-cell *matHeaderCellDef mat-sort-header>Admin</mat-header-cell>
               <mat-cell *matCellDef="let elem"> {{elem.admin}}</mat-cell>
+            </ng-container> -->
+
+            <ng-container matColumnDef="admin">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Admin</mat-header-cell>
+              <mat-cell *matCellDef="let elem"> {{elem.admin ? '&#10003;' : '&#10005;'}}</mat-cell>
             </ng-container>
 
             <!-- Columns for the DELETE and MODIFY Functions -->

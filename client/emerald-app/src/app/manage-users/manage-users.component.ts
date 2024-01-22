@@ -24,6 +24,8 @@ import { MatSort} from '@angular/material/sort';
 import { FormsModule } from '@angular/forms';
 import { MatTable } from '@angular/material/table';
 import { AppRoutingModule } from 'app/app.routing';
+import {MatCheckboxModule} from '@angular/material/checkbox'
+
 
 
 @Component({
@@ -38,6 +40,7 @@ import { AppRoutingModule } from 'app/app.routing';
     MatButtonModule,
     ReactiveFormsModule,
     FormsModule,
+    MatCheckboxModule,
   ],
   templateUrl: './manage-users.component.html',
   styleUrls: ['./manage-users.component.scss']
@@ -71,6 +74,8 @@ export class ManageUsersComponent implements OnInit {
   //   },
   // ]
 
+  checked = true;
+
   public UserArray: UserInfo[] = []
   public newUser: UserInfo
 
@@ -96,8 +101,8 @@ export class ManageUsersComponent implements OnInit {
   addUserForm = new FormGroup({
     id: new FormControl(''),
     username: new FormControl('', [Validators.required]),
-    password: new FormControl(''),
-    admin: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required]),
+    admin: new FormControl(false, [Validators.required]),
   })
 
   ngAfterViewInit() {
@@ -112,6 +117,7 @@ export class ManageUsersComponent implements OnInit {
     // this.dataSource.paginator = this.paginator;
     // this.dataSource.sort = this.sort;
   }
+
   
   registerUser() {
     const url = '../.netlify/functions/register';
