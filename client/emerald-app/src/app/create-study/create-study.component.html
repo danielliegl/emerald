@@ -1,0 +1,37 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-10 col-md-12">
+        <div class="card">
+          <div class="card-header card-header-tabs card-header-success">
+            <div class="nav-tabs-navigation">
+              <div class="nav-tabs-wrapper">
+                <span class="nav-tabs-title">
+                  <input matInput placeholder="Study Name">
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="tab-content">
+              <div class="tab-pane active" id="profile">
+                <mat-form-field appearance="fill">
+                  <textarea matInput placeholder="Description"></textarea>
+                </mat-form-field>
+                <mat-checkbox>Public</mat-checkbox>
+                <mat-select>
+                  <mat-option *ngFor="let user of userList" [value]="user">
+                    {{ user.name }}
+                  </mat-option>
+                </mat-select>
+                <div class="button-wrapper">
+                  <button mat-raised-button class="button-width"  color="primary">Create Study</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

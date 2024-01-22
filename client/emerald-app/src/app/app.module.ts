@@ -16,6 +16,7 @@ import { UserSidebarComponent } from './user-sidebar/user-sidebar.component';
 import { AdminSidebarComponent } from './admin-sidebar/admin-sidebar.component';
 import { UsersComponent } from './users/users.component';
 import { UserPanelComponent } from './user-panel/user-panel.component';
+import { CreateStudyComponent } from './create-study/create-study.component';
 
 @NgModule({
   imports: [
@@ -27,12 +28,12 @@ import { UserPanelComponent } from './user-panel/user-panel.component';
     RouterModule,
     AppRoutingModule,
     LoginComponent,
+    CreateStudyComponent,
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     LogoutButtonComponent,
-
     AdminPanelComponent,
     ReviewerPanelComponent,
     ProjectOwnerPanelComponent,
