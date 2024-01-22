@@ -27,9 +27,9 @@ const handler = async (event) => {
         }
     }
     
-    const found_user = await collection.findOne({id: user_id})
+    const found_user = await collection.findOne({_id: new ObjectId(user_id)})
     
-    if(!found_script)
+    if(!found_user)
     {
         return {
             statusCode: 400,
@@ -40,7 +40,7 @@ const handler = async (event) => {
     const username = found_user.name
 
     await collection.deleteOne({
-        id: new ObjectId(user_id)
+        _id: new ObjectId(user_id)
     })
 
     return {
