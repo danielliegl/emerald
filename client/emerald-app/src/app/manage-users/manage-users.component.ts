@@ -123,11 +123,11 @@ export class ManageUsersComponent implements OnInit {
       // get the values of the response
       var user_array = Object["values"](response)
       // debugging
-      user_array.forEach(element => {
-        console.log(element)
-      });
+      // user_array.forEach(element => {
+      //   console.log(element)
+      // });
       this.dataSource.data = user_array;
-      console.log(this.dataSource.data)
+      // console.log(this.dataSource.data)
     })
     
   }
