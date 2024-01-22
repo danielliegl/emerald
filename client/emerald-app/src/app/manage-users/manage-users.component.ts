@@ -126,7 +126,7 @@ export class ManageUsersComponent implements OnInit {
       //   console.log(element)
       // });
       this.dataSource.data = user_array;
-      console.log(this.dataSource.data)
+      // console.log(this.dataSource.data)
     })
     
   }
