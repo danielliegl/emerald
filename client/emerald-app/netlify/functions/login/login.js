@@ -6,11 +6,10 @@ const { ObjectId } = require('mongodb');
 
 async function init_admin(collection)
 {
-  const users = collection.find({}).toArray();
+  const users = await collection.find({}).toArray();
   if(users.length === 0)
   {
     const hashedPassword = await bcrypt.hash("admin", 10); // Use 10 rounds of salt
-
     const newUser = {
       name: "admin",
       password: hashedPassword,
@@ -19,6 +18,7 @@ async function init_admin(collection)
     };
 
     await collection.insertOne(newUser)
+    console.log("Admin user Created!")
   }
 }
 
@@ -31,7 +31,6 @@ exports.handler = async (event) => {
     // Parse the incoming request body for credentials
     const { username, password } = JSON.parse(event.body);
 
-
     // Check if the user exists in the database
     var existing_user = await users.findOne({ name: username });
 
@@ -40,6 +39,8 @@ exports.handler = async (event) => {
       await init_admin(users)
       existing_user = await users.findOne({ name: username})
     }
+
+    console.log(existing_user)
 
     
     if(!existing_user || !(await bcrypt.compare(password, existing_user.password)))
