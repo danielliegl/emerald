@@ -1,1 +1,67 @@
-<p>study-details works!</p>
+<div class="main-content">
+  <h1 class="title">{{study.name}}</h1>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-10 col-md-12">
+        <div class="card">
+          <div class="card-header card-header-tabs card-header-success">
+            <div class="nav-tabs-navigation">
+              <div class="nav-tabs-wrapper">
+                <span class="nav-tabs-title">Study Description</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="tab-content">
+              <div class="tab-pane active" id="profile">
+                <p><strong>{{study.description}}</strong></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-10 col-md-12">
+        <div class="card">
+          <div class="card-header card-header-tabs card-header-warning">
+            <div class="nav-tabs-navigation">
+              <div class="nav-tabs-wrapper">
+                <span class="nav-tabs-title">Requirements:</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <!-- Angabe der Dynamisch geladenen Daten -->
+            <table mat-table [dataSource]="study.requirements" class="">
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef>ID</th>
+                <td mat-cell *matCellDef="let item">{{ item.id }}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="name" >
+                <th mat-header-cell *matHeaderCellDef>Name</th>
+                <td class="requirements-name" mat-cell *matCellDef="let item"><strong>{{ item.name }}</strong></td>
+              </ng-container>
+
+              <ng-container matColumnDef="button">
+                <th mat-header-cell *matHeaderCellDef>Button</th>
+                <td mat-cell *matCellDef="let item">
+                  <button mat-raised-button (click)="openConfirmationDialog(item)" *ngIf="item.validated ==='empty'">Evaluate</button>
+                  <button mat-raised-button class="success-button" *ngIf="item.validated ==='works'">Success</button>
+                  <button mat-raised-button class ="fail-button" *ngIf="item.validated ==='fails'">Failure</button>
+                  <ng-template #noButton>
+                    <button mat-raised-button color="warn">No</button>
+                  </ng-template>
+                </td>
+              </ng-container>
+
+
+              <!-- add more columns as needed -->
+              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

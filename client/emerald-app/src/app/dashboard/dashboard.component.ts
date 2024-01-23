@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import * as Chartist from 'chartist';
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
-import {UserService} from "../users/users.services";
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -11,9 +9,9 @@ import {UserService} from "../users/users.services";
 })
 export class DashboardComponent implements OnInit {
   studies: any = null;
-  yourStudies: any[] = [];
-  assignedStudies: any[] = []
-  constructor(private http: HttpClient, private router: Router, public userService: UserService) { }
+  displayedColumns: string[] = ['name', 'button'];
+  displayedColumns2: string[] = ['name','date','button'];
+  constructor(private http: HttpClient, private router: Router) { }
   startAnimationForLineChart(chart){
       let seq: any, delays: any, durations: any;
       seq = 0;
@@ -51,6 +49,21 @@ export class DashboardComponent implements OnInit {
     this.http.post('../.netlify/functions/create_script', null).subscribe((response) => {
       console.log(response)
     })
+  }
+
+  formattedDate(date: any): string {
+    const dateObject = new Date(date);
+    const formattedDate = this.formatDate(dateObject);
+    return formattedDate;
+  }
+  private formatDate(date: Date): string {
+    const options: Intl.DateTimeFormatOptions = {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    };
+
+    return new Intl.DateTimeFormat('en-US', options).format(date);
   }
   getScript(){
     const scriptData = {

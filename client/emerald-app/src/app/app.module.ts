@@ -19,6 +19,9 @@ import { UserPanelComponent } from './user-panel/user-panel.component';
 import { StudyDetailsComponent } from './study-details/study-details.component';
 import { CreateStudyComponent } from './create-study/create-study.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
   imports: [
@@ -32,6 +35,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     LoginComponent,
     CreateStudyComponent,
     MatPaginatorModule,
+    MatDialogModule,
+    MatButtonModule,
   ],
   declarations: [
     AppComponent,
@@ -41,6 +46,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     ReviewerPanelComponent,
     ProjectOwnerPanelComponent,
     UserPanelComponent,
+    ConfirmationDialogComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,5 @@
 <div class="main-content">
+  <h1 class="title">User Dashboard</h1>
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-10 col-md-12">
@@ -13,77 +14,68 @@
           <div class="card-body">
             <div class="tab-content">
               <div class="tab-pane active" id="profile">
-                <table class="table">
-                  <tbody>
-                  <tr class="study-table" routerLink="/user-panel/user-panel/study-details/{{studies.user_scripts[0].id}}">
-                    <td>{{studies.user_scripts[0].name}}</td>
-                    <td><strong>Study Name</strong></td>
-                    <td class="status">Status:  Running</td>
-                    <td class="status">Users finished: 3/4</td>
-                  </tr>
-                  <tr class="study-table">
-                    <td><strong>Study Name</strong></td>
-                    <td class="status">Status:  Running</td>
-                    <td class="status">Users finished: 3/4</td>
-                  </tr>
-                  <tr class="study-table">
-                    <td><strong>Study Name</strong></td>
-                    <td class="status">Status:  Running</td>
-                    <td class="status">Users finished: 3/4</td>
-                  </tr>
-                  <tr class="study-table">
-                    <td><strong>Study Name</strong></td>
-                    <td class="status">Status:  Running</td>
-                    <td class="status">Users finished: 3/4</td>
-                  </tr>
-                  </tbody>
+                <table mat-table [dataSource]="studies.user_scripts" class="">
+                  <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef>ID</th>
+                    <td mat-cell *matCellDef="let item">{{ item.id }}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef>Name</th>
+                    <td mat-cell *matCellDef="let item" class="studies-name">{{ item.name }}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="button">
+                    <th mat-header-cell *matHeaderCellDef>Button</th>
+                    <td mat-cell *matCellDef="let item">
+                      <button mat-raised-button [routerLink]="['/user-panel/user-panel/study-details',item.id]" >Open</button>
+                    </td>
+                  </ng-container>
+                  <!-- add more columns as needed -->
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
                 </table>
-                <div class="button-wrapper">
-                  <button mat-raised-button class="button-width" (click)="getUsers()"  color="primary">Create Study</button>
-                </div>
-              </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-    <div class="row">
-      <div class="col-lg-10 col-md-12">
-        <div class="card">
-          <div class="card-header card-header-tabs card-header-warning">
-            <div class="nav-tabs-navigation">
-              <div class="nav-tabs-wrapper">
-                <span class="nav-tabs-title">Your Assigned Studies:</span>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="tab-content">
-              <div class="tab-pane active" id="profile">
-                <table class="table">
-                  <tbody>
-                  <tr class="study-table finished-study">
-                    <td><strong>Finished Study</strong></td>
-                    <td class="status">Due: January 16, 2024</td>
-                    <td class="status">By: StudyOwner</td>
-                    <td class="status">Open</td>
-                  </tr>
-                  <tr class="study-table">
-                    <td><strong>Study Name</strong></td>
-                    <td class="status">Due: January 23, 2024</td>
-                    <td class="status">UBy: StudyOwner</td>
-                    <td class="status">Open</td>
-                  </tr>
-                  <tr class="study-table">
-                    <td><strong>Study Name</strong></td>
-                    <td class="status">Due: January 23, 2024</td>
-                    <td class="status">By: StudyOwner</td>
-                    <td class="status">Open</td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
+                <!--
+               <div class="button-wrapper">
+                 <button mat-raised-button class="button-width" (click)="getUsers()"  color="primary">Create Study</button>
+               </div>
+               -->
+             </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+   <div class="row">
+     <div class="col-lg-10 col-md-12">
+       <div class="card">
+         <div class="card-header card-header-tabs card-header-warning">
+           <div class="nav-tabs-navigation">
+             <div class="nav-tabs-wrapper">
+               <span class="nav-tabs-title">Your Assigned Studies:</span>
+             </div>
+           </div>
+         </div>
+         <div class="card-body">
+           <table mat-table [dataSource]="studies.assigned_scripts" class="">
+             <ng-container matColumnDef="id">
+               <th mat-header-cell *matHeaderCellDef>ID</th>
+               <td mat-cell *matCellDef="let item">{{ item.id }}</td>
+             </ng-container>
+             <ng-container matColumnDef="name">
+               <th mat-header-cell *matHeaderCellDef>Name</th>
+               <td mat-cell *matCellDef="let item"  class="requirements-name"><strong>{{ item.name }}</strong></td>
+             </ng-container>
+             <ng-container matColumnDef="date">
+               <th mat-header-cell *matHeaderCellDef>Date</th>
+               <td mat-cell *matCellDef="let item"  class="requirements-name"><strong>Due: {{ formattedDate(item.due_date) }}</strong></td>
+             </ng-container>
+             <ng-container matColumnDef="button">
+               <th mat-header-cell *matHeaderCellDef>Button</th>
+               <td mat-cell *matCellDef="let item">
+                 <button mat-raised-button [routerLink]="['/user-panel/user-panel/study-details',item.id]" >Open</button>
+               </td>
+             </ng-container>
+             <!-- add more columns as needed -->
+              <tr mat-row *matRowDef="let row; columns: displayedColumns2"></tr>
+            </table>
           </div>
         </div>
       </div>

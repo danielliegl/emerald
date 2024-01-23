@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
-import {UserService} from "../users/users.services";
-
 @Component({
   selector: 'app-user-panel',
   templateUrl: './user-panel.component.html',
@@ -10,7 +8,7 @@ import {UserService} from "../users/users.services";
 })
 export class UserPanelComponent implements OnInit {
 
-  constructor(private http: HttpClient, private router: Router, public userService: UserService) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
   }
