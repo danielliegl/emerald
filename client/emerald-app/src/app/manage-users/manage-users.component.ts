@@ -55,7 +55,8 @@ export class ManageUsersComponent implements OnInit {
   @ViewChild(MatSort, {}) sort: MatSort;
 
   // The Columns needed to display in the Registered Users Table.
-  columnsToDisplay = ['id', 'username', 'admin', 'delete']
+  columnsToDisplay = ['id', 'username', 'admin', 'project_owner', 'delete']
+  // columnsToDisplay = ['username', 'admin', 'project_owner', 'delete']
 
   user: User;
   users: User[] = [];
@@ -71,6 +72,7 @@ export class ManageUsersComponent implements OnInit {
     username: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
     admin: new FormControl(false, [Validators.required]),
+    project_owner: new FormControl(false, [Validators.required])
   })
 
   ngAfterViewInit() {
@@ -90,19 +92,19 @@ export class ManageUsersComponent implements OnInit {
   registerUser() {
     const url = '../.netlify/functions/register';
     // const newUsersArray = this.UserArray;
-
     const body = {
       username: this.addUserForm.get('username').value,
       password: this.addUserForm.get('password').value,
-      admin: this.addUserForm.get('admin').value
+      admin: this.addUserForm.get('admin').value,
+      project_owner: this.addUserForm.get('project_owner').value
     }
-    
     // the new user to be regestered.
     this.newUser = {
       id: this.addUserForm.get('id').value,
       username: this.addUserForm.get('username').value,
       password: this.addUserForm.get('password').value,
-      admin: this.addUserForm.get('admin').value
+      admin: this.addUserForm.get('admin').value,
+      project_owner: this.addUserForm.get('project_owner').value
     }
 
     this.http.post<any>(url, body)
@@ -121,12 +123,7 @@ export class ManageUsersComponent implements OnInit {
     this.http.post(url, body).subscribe(response => {
       // get the values of the response
       var user_array = Object["values"](response)
-      // debugging
-      // user_array.forEach(element => {
-      //   console.log(element)
-      // });
       this.dataSource.data = user_array;
-      // console.log(this.dataSource.data)
     })
     
   }
@@ -141,12 +138,9 @@ export class ManageUsersComponent implements OnInit {
 
     var body = JSON.stringify(id_object)
     this.http.post(url, body).subscribe(response => {
-      console.log('DELETE LOG')
-      console.log(response)
     })
     this.getUsers()
   }
-
   // Filtering the table accodingly
   filterProduct(value: string):void{
     this.dataSource.filter = value.trim().toLowerCase();

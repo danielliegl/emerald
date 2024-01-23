@@ -34,6 +34,10 @@
           <input type="checkbox" placeholder="Admin" formControlName="admin">
           <mat-hint> Admin</mat-hint>
           <br />
+          <!-- ADMIN Field -->
+          <input type="checkbox" placeholder="Project Owner" formControlName="project_owner">
+          <mat-hint> Project Owner</mat-hint>
+          <br />
           <span layout="row"><hr flex/></span>
           <button [disabled]="!addUserForm.valid" mat-raised-button type="submit">
             Confirm
@@ -88,6 +92,11 @@
             <ng-container matColumnDef="admin">
               <mat-header-cell *matHeaderCellDef mat-sort-header>Admin</mat-header-cell>
               <mat-cell *matCellDef="let elem"> {{elem.admin ? '&#10003;' : '&#10005;'}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="project_owner">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Project Owner</mat-header-cell>
+              <mat-cell *matCellDef="let elem"> {{elem.project_owner ? '&#10003;' : '&#10005;'}}</mat-cell>
             </ng-container>
 
             <!-- Columns for the DELETE and MODIFY Functions -->

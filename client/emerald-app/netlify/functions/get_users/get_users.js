@@ -14,7 +14,8 @@ const handler = async (event) => {
       retval.push({
         id: user._id,
         username: user.name,
-        admin: user.admin
+        admin: user.admin,
+        project_owner: user.project_owner
       })
     );
 

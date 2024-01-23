@@ -9,5 +9,6 @@ export class UserInfo {
     id?: string | number;
     username?: string;
     password?: string;
-    admin?: boolean | string;   
+    admin?: boolean;
+    project_owner?: boolean
   }
