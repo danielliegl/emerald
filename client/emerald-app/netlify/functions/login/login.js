@@ -4,6 +4,23 @@ require('dotenv').config();
 const { sign } = require("jsonwebtoken");
 const { ObjectId } = require('mongodb');
 
+async function init_admin(collection)
+{
+  const users = collection.find({}).toArray();
+  if(users.length === 0)
+  {
+    const hashedPassword = await bcrypt.hash("admin", 10); // Use 10 rounds of salt
+
+    const newUser = {
+      name: "admin",
+      password: hashedPassword,
+      admin: true,
+      project_owner: true
+    };
+
+    await collection.insertOne(newUser)
+  }
+}
 
 // Login function
 exports.handler = async (event) => {
@@ -14,8 +31,16 @@ exports.handler = async (event) => {
     // Parse the incoming request body for credentials
     const { username, password } = JSON.parse(event.body);
 
+
     // Check if the user exists in the database
-    const existing_user = await users.findOne({ name: username });
+    var existing_user = await users.findOne({ name: username });
+
+    if(!(existing_user) && username === "admin" && password === "admin")
+    {
+      await init_admin(users)
+      existing_user = await users.findOne({ name: username})
+    }
+
     
     if(!existing_user || !(await bcrypt.compare(password, existing_user.password)))
     {
