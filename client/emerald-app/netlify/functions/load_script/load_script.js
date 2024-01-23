@@ -9,6 +9,7 @@ const handler = async (event) => {
     const collection = database.collection(process.env.MONGODB_COLLECTION_SCRIPTS);
     const script_id = requestData.id;
     const decodedUserID = verify_jwt(event.headers)
+    const user_id = new ObjectId(decodedUserID.user_id)
 
     if(!script_id)
     {
@@ -27,11 +28,30 @@ const handler = async (event) => {
         body: "No Script with ID " + script_id + " found."
       }
     }
+    if(results.owner.equals(user_id))
+    {
+      return {
+        statusCode: 200,
+        body: JSON.stringify(results),
+      }
+    }
+
+    //filter out values that the user filling out the project does not need
+    //i.e. values that other users entered into the study or the assigned users
+    for(const requirement of results.requirements)
+    {
+      requirement.values = requirement.values.filter(value => value.user_id.equals(user_id));
+    }
+
+    results.assignedUsers = undefined
+    results.isPublic = undefined
+    results.owner = undefined
 
     return {
       statusCode: 200,
-      body: JSON.stringify(results),
+      body: JSON.stringify(results)
     }
+
   }
   catch (error)
   {

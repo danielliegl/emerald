@@ -25,7 +25,7 @@ exports.handler = async (event) => {
       };
     }
 
-    const token = sign({user_id: existing_user._id, admin: existing_user.admin}, process.env.SECRET, {expiresIn: '12h'})
+    const token = sign({user_id: existing_user._id, admin: existing_user.admin, project_owner: existing_user.project_owner}, process.env.SECRET, {expiresIn: '12h'})
 
     return({
       statusCode: 200,
