@@ -26,6 +26,7 @@ import { AppRoutingModule } from 'app/app.routing';
 import {MatCheckboxModule} from '@angular/material/checkbox'
 // export
 import { ngxCsv } from 'ngx-csv/ngx-csv';
+import { ExportService } from 'app/export/export.service';
 
 
 
@@ -66,7 +67,7 @@ export class ManageUsersComponent implements OnInit {
 
   @ViewChild('targetCell') targetCell!: ElementRef;
   // , private exportService: ExportService
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private exportservice: ExportService) { }
 
 
   addUserForm = new FormGroup({
@@ -91,24 +92,28 @@ export class ManageUsersComponent implements OnInit {
   }
 
   // Export as excel and csv
-exportAsCSV(){
-  var options = { 
-    fieldSeparator: ',',
-    quoteStrings: '"',
-    decimalseparator: '.',
-    showLabels: true,
-    // this is the Title of the File
-    // showTitle: true,
-    // title: 'User Data',
-    useBom: true,
-    // this flage locks the download (delete if no lock is needed)
-    noDownload: false,
-    headers: ["id", "username", "admin", "project-owner"]
-  };
-  console.log(this.dataSource.data)
- 
-  new ngxCsv(this.dataSource.data, "user-data", options);
-}
+  exportAsCSV() {
+    var header = ["id", "username", "admin", "project-owner"]
+    this.exportservice.handleExportAsCSV(this.dataSource, header)
+  }
+  // exportAsCSV(){
+  //   var options = { 
+  //     fieldSeparator: ',',
+  //     quoteStrings: '"',
+  //     decimalseparator: '.',
+  //     showLabels: true,
+  //     // this is the Title of the File
+  //     // showTitle: true,
+  //     // title: 'User Data',
+  //     useBom: true,
+  //     // this flage locks the download (delete if no lock is needed)
+  //     noDownload: false,
+  //     headers: ["id", "username", "admin", "project-owner"]
+  //   };
+  //   console.log(this.dataSource.data)
+  
+  //   new ngxCsv(this.dataSource.data, "user-data", options);
+  // }
   // register users in the backend
   registerUser() {
     const url = '../.netlify/functions/register';
