@@ -24,6 +24,8 @@ import { FormsModule } from '@angular/forms';
 import { MatTable } from '@angular/material/table';
 import { AppRoutingModule } from 'app/app.routing';
 import {MatCheckboxModule} from '@angular/material/checkbox'
+// export
+import { ngxCsv } from 'ngx-csv/ngx-csv';
 
 
 
@@ -63,7 +65,7 @@ export class ManageUsersComponent implements OnInit {
   [x: string]: any;
 
   @ViewChild('targetCell') targetCell!: ElementRef;
-  
+  // , private exportService: ExportService
   constructor(private http: HttpClient, private router: Router) { }
 
 
@@ -88,6 +90,25 @@ export class ManageUsersComponent implements OnInit {
     // this.dataSource.sort = this.sort;
   }
 
+  // Export as excel and csv
+exportAsCSV(){
+  var options = { 
+    fieldSeparator: ',',
+    quoteStrings: '"',
+    decimalseparator: '.',
+    showLabels: true,
+    // this is the Title of the File
+    // showTitle: true,
+    // title: 'User Data',
+    useBom: true,
+    // this flage locks the download (delete if no lock is needed)
+    noDownload: false,
+    headers: ["id", "username", "admin", "project-owner"]
+  };
+  console.log(this.dataSource.data)
+ 
+  new ngxCsv(this.dataSource.data, "user-data", options);
+}
   // register users in the backend
   registerUser() {
     const url = '../.netlify/functions/register';
