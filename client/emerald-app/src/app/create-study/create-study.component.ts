@@ -12,6 +12,8 @@ import {MatTableDataSource, MatTableModule} from "@angular/material/table";
 import {MatButtonModule} from "@angular/material/button";
 import {NgForOf, NgIf} from "@angular/common";
 import {MatIconModule} from "@angular/material/icon";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import { MatNativeDateModule } from '@angular/material/core';
 
 @Component({
   selector: 'app-create-study',
@@ -29,7 +31,9 @@ import {MatIconModule} from "@angular/material/icon";
     MatTableModule,
     NgIf,
     NgForOf,
-    MatIconModule
+    MatIconModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ]
 })
 export class CreateStudyComponent implements OnInit {
@@ -37,6 +41,7 @@ export class CreateStudyComponent implements OnInit {
   public userList: any[] = [];
   private assignedUsers: any [] = [];
   private requirements: any [] = [];
+  selectedDate: Date;
   createStudyForm: FormGroup;
   [x: string]: any;
   columnsToDisplay = ['id', 'username', 'button']
@@ -57,7 +62,10 @@ export class CreateStudyComponent implements OnInit {
     })
   }
 
-
+  onDateChange(event: any): void {
+    this.selectedDate = event.value;
+    console.log('Selected date:', this.selectedDate);
+  }
   getUsers(){
     const body: UserInfo [] = []
     const url = '../.netlify/functions/get_users';
@@ -123,6 +131,7 @@ export class CreateStudyComponent implements OnInit {
       isPublic: true,
       assignedUsers: this.assignedUsers,
       requirements: this.inputFields.value,
+      due_date: this.selectedDate,
       id:"6599afcd319a788ac3468f7x"
     }
     console.log(body);

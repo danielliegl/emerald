@@ -35,7 +35,11 @@
               </div>
 
               <button mat-raised-button type="button" (click)="addInputField()">Add Criteria</button>
-
+              <mat-form-field class="date-field">
+                <input matInput [matDatepicker]="picker" placeholder="Due date" (dateChange)="onDateChange($event)">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
             </div>
           </div>
           <div class="card">
@@ -70,22 +74,8 @@
                   <mat-cell *matCellDef="let elem"> {{elem.username}}</mat-cell>
                 </ng-container>
 
-                <!-- Name of the THIRD Column -->
-                <!-- <ng-container matColumnDef="admin">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Admin</mat-header-cell>
-                  <mat-cell *matCellDef="let elem"> {{elem.admin}}</mat-cell>
-                </ng-container> -->
-                <!-- Columns for the DELETE and MODIFY Functions -->
-
-                <!-- <ng-container matColumnDef="edit">
-                  <mat-header-cell *matHeaderCellDef> Edit </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> <button mat-icon-button matTooltip="Click to Edit"
-                      color="primary" (click)="edit(element)">
-                      <mat-icon>edit</mat-icon>
-                    </button> </mat-cell>
-                </ng-container> -->
                 <ng-container matColumnDef="button">
-                  <mat-header-cell *matHeaderCellDef>Button</mat-header-cell>
+                  <mat-header-cell class="align-right " *matHeaderCellDef>Assignment</mat-header-cell>
                   <mat-cell *matCellDef="let element">
                     <button mat-raised-button class="success-button" (click)="assignUser(element)" *ngIf="isAssigned(element)">Assigned</button>
                     <button mat-raised-button (click)="assignUser(element)" *ngIf="isNotAssigned(element)">Assign</button>
