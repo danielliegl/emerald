@@ -1,20 +1,21 @@
 const { connectToDatabase } = require("../mongoDB")
 const { Script } = require("../script")
 const { verify_jwt } = require("../verify_token")
+const { ObjectId } = require("mongodb")
 
 const handler = async (event) => {
   try {
 
     const decodedUser = verify_jwt(event.headers)
 
-    const requestData = JSON.parse(event.body)
+    var requestData = JSON.parse(event.body)
     const database = await connectToDatabase()
     const collection = database.collection(process.env.MONGODB_COLLECTION_SCRIPTS);
-    new_script = new Script(requestData.name, decodedUser.user_id)
-    collection.insertOne(new_script)
+    requestData.project_data.owner = new ObjectId(decodedUser.user_id)
+    await collection.insertOne(requestData.project_data)
     return {
       statusCode: 200,
-      body: JSON.stringify({new_script: new_script})
+      body: JSON.stringify(project_data)
     }
   }
   catch (error)

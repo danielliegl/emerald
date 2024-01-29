@@ -35,41 +35,66 @@ const handler = async (event) => {
       }
     }
 
+    const find_value = await collection.findOne({
+      $and: [
+        {_id: new ObjectId(documentId)},
+        {assignedUsers: user_id},
+        { requirements:
+          {
+            $elemMatch:
+            {
+              name: requirement.name,
+              values: {
+                $elemMatch:
+                {
+                  user_id: user_id
+                }
+              }
+            }
+          }
+        },
+      ]
+    })
+
     const requirementName = requirement.name;
+    const requirementIndex = requirement.index;
 
     const valueToUpdate = requirement.value;
-
-    const updateResult = await collection.updateOne(
-      {
-        _id: documentId,
-        'requirements.name': requirementName,
-        'requirements.values.user_id': user_id,
-      },
-      {
-        $set: { 'requirements.$[req].values.$[val].value': valueToUpdate },
-      },
-      {
-        arrayFilters: [
-          { 'req.name': requirementName },
-          { 'val.user_id': user_id },
-        ],
-      }
-    );
-
-    // If the value does not exist, add it
-    if (updateResult.matchedCount === 0) {
-      await collection.updateOne(
+    if(find_value)
+    {
+      const updateResult = await collection.updateOne(
         {
           _id: documentId,
           'requirements.name': requirementName,
+          'requirements.values.user_id': user_id,
         },
         {
-          $push: { 'requirements.$.values': { user_id: user_id, value: valueToUpdate } },
+          $set: { 'requirements.$[req].values.$[val].value': valueToUpdate },
+        },
+        {
+          arrayFilters: [
+            { 'req.name': requirementName },
+            { 'val.user_id': user_id },
+          ],
         }
       );
+      console.log("Updated Existing Value")
+    }
+    else
+    {
+      const target_array = `requirements.${requirementIndex}.values`
+      console.log(target_array)
+      const retval = await collection.updateOne(
+        {
+          _id: documentId,
+        },
+        {
+          $push: { [target_array]: { user_id: user_id, value: valueToUpdate } },
+        }
+      );
+      console.log("Added New Value")
     }
 
-    console.log('Value updated or added successfully');
     
     return {
       statusCode: 200
