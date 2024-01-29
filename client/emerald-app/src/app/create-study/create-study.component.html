@@ -2,37 +2,106 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-10 col-md-12">
-        <form [formGroup]="createStudyForm">
+        <form [formGroup]="createStudyForm" (ngSubmit)="this.createNewProject()">
           <div class="card">
             <div class="card-header card-header-tabs card-header-success">
               <div class="nav-tabs-navigation">
                 <div class="nav-tabs-wrapper">
-                  <span class="nav-tabs-title">
-                    <input matInput placeholder="Study Name" formControlName="name">
-                  </span>
+                  <span class="nav-tabs-title">Project Details:</span>
                 </div>
               </div>
             </div>
             <div class="card-body">
-              <div class="tab-content">
-                <div class="tab-pane active" id="profile">
-                  <mat-form-field appearance="fill">
-                    <textarea matInput placeholder="Description" formControlName="description"></textarea>
+              <mat-form-field>
+                <mat-label>Project name</mat-label>
+                <input matInput placeholder="Enter a project name" formControlName="name" />
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Project description</mat-label>
+                <input matInput placeholder="Enter a project description" formControlName="description" />
+              </mat-form-field>
+            </div>
+            <div class="card-body">
+              <div formArrayName="inputFields">
+                <div *ngFor="let inputField of inputFields.controls; let i = index" [formGroupName]="i">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Enter criteria {{i + 1}}</mat-label>
+                    <input class="criteria-input" formControlName="criteria" matInput placeholder="Enter project criteria">
+                    <button mat-icon-button color="warn" (click)="deleteInputField(i)">
+                      <mat-icon>close</mat-icon>
+                    </button>
                   </mat-form-field>
-                  <mat-form-field>
-                    <mat-checkbox formControlName="public">Public</mat-checkbox>
-                  </mat-form-field>
-                  <mat-form-field>
-                    <mat-label>Assigned Users</mat-label>
-                    <mat-select formControlName="assignedUsers" multiple>
-                      <mat-option *ngFor="let user of userList" [value]="user">{{user.name}}</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                  <div class="button-wrapper">
-                    <button mat-raised-button class="button-width"  color="primary">Create Study</button>
-                  </div>
                 </div>
               </div>
+
+              <button mat-raised-button type="button" (click)="addInputField()">Add Criteria</button>
+
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header card-header-tabs card-header-success">
+              <div class="nav-tabs-navigation">
+                <div class="nav-tabs-wrapper">
+                  <span class="nav-tabs-title">Assign Users</span>
+                </div>
+              </div>
+            </div>
+            <!-- Inhalt der Tabelle -->
+            <div class="card-body">
+              <!-- Filter Feld, um nach Usern zu suchen -->
+              <mat-form-field>
+                <mat-label>Filter Users</mat-label>
+                <input matInput type="text" [(ngModel)]="filterValue"
+                       (blur)="filterProduct(filterValue)" placeholder="Search username">
+              </mat-form-field>
+
+              <!-- Angabe der Dynamisch geladenen Daten -->
+              <mat-table [dataSource]="dataSource">
+
+                <!-- Name of the FIRST Column -->
+                <ng-container matColumnDef="id">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+                  <mat-cell *matCellDef="let elem"> {{elem.id}}</mat-cell>
+                </ng-container>
+
+                <!-- Name of the SECOND Column -->
+                <ng-container matColumnDef="username">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Username</mat-header-cell>
+                  <mat-cell *matCellDef="let elem"> {{elem.username}}</mat-cell>
+                </ng-container>
+
+                <!-- Name of the THIRD Column -->
+                <!-- <ng-container matColumnDef="admin">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Admin</mat-header-cell>
+                  <mat-cell *matCellDef="let elem"> {{elem.admin}}</mat-cell>
+                </ng-container> -->
+                <!-- Columns for the DELETE and MODIFY Functions -->
+
+                <!-- <ng-container matColumnDef="edit">
+                  <mat-header-cell *matHeaderCellDef> Edit </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> <button mat-icon-button matTooltip="Click to Edit"
+                      color="primary" (click)="edit(element)">
+                      <mat-icon>edit</mat-icon>
+                    </button> </mat-cell>
+                </ng-container> -->
+                <ng-container matColumnDef="button">
+                  <mat-header-cell *matHeaderCellDef>Button</mat-header-cell>
+                  <mat-cell *matCellDef="let element">
+                    <button mat-raised-button class="success-button" (click)="assignUser(element)" *ngIf="isAssigned(element)">Assigned</button>
+                    <button mat-raised-button (click)="assignUser(element)" *ngIf="isNotAssigned(element)">Assign</button>
+
+                  </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: columnsToDisplay"></mat-row>
+
+              </mat-table>
+              <br />
+              <button class="button" mat-raised-button matTooltip="Click to create project" color="primary" type="submit">Create Project</button>
+
+              <!-- Page Count -->
+              <!-- <mat-paginator [pageSize]="10" [pageSizeOptions]="5,10,20,25,50" [showFirstLastButtons]="true"></mat-paginator> -->
             </div>
           </div>
         </form>

@@ -37,16 +37,16 @@ export class StudyDetailsComponent implements OnInit {
     console.log(item);
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        /*const script = {
+        const script = {
           id: this.itemId.toString(),
           requirement: {
             name: item.name,
-            value: 1
+            value: true
           }
         }
         this.http.post('../.netlify/functions/edit_requirement_value', script).subscribe((response) => {
-          console.log(response);
-        })*/
+          console.log(script);
+        })
         item.validated ="works";
         // User clicked "Yes"
         // Implement your logic here
