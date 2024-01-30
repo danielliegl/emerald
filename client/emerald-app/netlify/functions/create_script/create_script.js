@@ -11,15 +11,16 @@ const handler = async (event) => {
     var requestData = JSON.parse(event.body)
     const database = await connectToDatabase()
     const collection = database.collection(process.env.MONGODB_COLLECTION_SCRIPTS);
-    requestData.project_data.owner = new ObjectId(decodedUser.user_id)
-    await collection.insertOne(requestData.project_data)
+    requestData.owner = new ObjectId(decodedUser.user_id)
+    await collection.insertOne(requestData)
     return {
       statusCode: 200,
-      body: JSON.stringify(project_data)
+      body: JSON.stringify(requestData)
     }
   }
   catch (error)
   {
+    console.log(error)
     return { statusCode: 500, body: error.toString() };
   }
 }
