@@ -12,6 +12,11 @@ const handler = async (event) => {
     const database = await connectToDatabase()
     const collection = database.collection(process.env.MONGODB_COLLECTION_SCRIPTS);
     requestData.owner = new ObjectId(decodedUser.user_id)
+    for (let index = 0; index < requestData.assignedUsers.length; index++) {
+      requestData.assignedUsers[index] = new ObjectId(requestData.assignedUsers[index].id);
+    }
+    console.log(requestData)
+
     await collection.insertOne(requestData)
     return {
       statusCode: 200,
