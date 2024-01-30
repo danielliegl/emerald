@@ -14,11 +14,11 @@ export class ConfirmationDialogComponent {
   ngOnInit(): void {
   }
   onNoClick(): void {
-    this.dialogRef.close(false);
+    this.dialogRef.close("no");
   }
 
   onYesClick(): void {
-    this.dialogRef.close(true);
+    this.dialogRef.close("true");
   }
 }
 

@@ -11,6 +11,7 @@ export class DashboardComponent implements OnInit {
   studies: any = null;
   displayedColumns: string[] = ['name', 'button'];
   displayedColumns2: string[] = ['name','date','button'];
+  user: any = null;
   constructor(private http: HttpClient, private router: Router) { }
   startAnimationForLineChart(chart){
       let seq: any, delays: any, durations: any;
@@ -51,6 +52,14 @@ export class DashboardComponent implements OnInit {
     })
   }
 
+  getProfile(): void {
+    this.http.post('../.netlify/functions/get_profile', null).subscribe((response) => {
+      this.user = response;
+      console.log(this.user)
+      //this.studies = null;
+    })
+  }
+
   formattedDate(date: any): string {
     const dateObject = new Date(date);
     const formattedDate = this.formatDate(dateObject);
@@ -66,9 +75,6 @@ export class DashboardComponent implements OnInit {
     return new Intl.DateTimeFormat('en-US', options).format(date);
   }
   getScript(){
-    const scriptData = {
-      id: "65ae4354838db147163a47a4"
-    }
     this.http.post('../.netlify/functions/get_user_scripts', null).subscribe((response) => {
       this.studies = response;
       console.log(this.studies)
@@ -101,6 +107,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
       /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
       this.getScript();
+      this.getProfile();
       const dataDailySalesChart: any = {
           labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
           series: [

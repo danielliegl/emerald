@@ -16,6 +16,10 @@ export class StudyDetailsComponent implements OnInit {
   displayedColumns: string[] = ['name','button'];
 
   ngOnInit(): void {
+    this.loadScript();
+  }
+
+  loadScript() : void {
     this.route.params.subscribe((params) => {
       this.itemId = params['id'];
       const scriptId = {
@@ -28,34 +32,62 @@ export class StudyDetailsComponent implements OnInit {
       // Use this.itemId to make your fetch request or perform other actions
     });
   }
-
+  hasValidated(item: any): boolean  {
+    return (item.values.length ===  0);
+  }
+  evaluationSuccess(item: any): any  {
+   if(item.values.length > 0) {
+     if(item.values[0].value === true) {
+       return true;
+     }
+   }
+  }
+  evalutionFailure(item: any): any  {
+    if(item.values.length > 0) {
+      if(item.values[0].value === false) {
+        return true;
+      }
+    }
+  }
   openConfirmationDialog(item: any): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: '300px',
-      data: { message: 'Does this requirement work as expected?' },
+      data: { message: 'Does this criteria work as expected?' },
     });
-    console.log(item);
+    let indexOfItem = this.study.requirements.indexOf(item);
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
+      if (result === "true") {
         const script = {
           id: this.itemId.toString(),
           requirement: {
+            index: indexOfItem,
             name: item.name,
             value: true
           }
         }
         this.http.post('../.netlify/functions/edit_requirement_value', script).subscribe((response) => {
-          console.log(script);
+          console.log(response);
+          this.ngOnInit();
         })
-        item.validated ="works";
-        // User clicked "Yes"
-        // Implement your logic here
-      } else {
-        item.validated ="fails";
+      } else if(result === "no") {
+        const script = {
+          id: this.itemId.toString(),
+          requirement: {
+            index: indexOfItem,
+            name: item.name,
+            value: false
+          }
+        }
+        this.http.post('../.netlify/functions/edit_requirement_value', script).subscribe((response) => {
+          console.log(response);
+          this.ngOnInit();
+        })
         // User clicked "No" or closed the dialog
         // Implement your logic here
       }
+      else {
+        console.log("cancelled");
+      }
     });
   }
-
 }

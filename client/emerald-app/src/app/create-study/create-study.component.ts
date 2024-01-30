@@ -43,6 +43,7 @@ export class CreateStudyComponent implements OnInit {
   private requirements: any [] = [];
   selectedDate: Date;
   createStudyForm: FormGroup;
+  profile: any = null;
   [x: string]: any;
   columnsToDisplay = ['id', 'username', 'button']
 
@@ -52,6 +53,7 @@ export class CreateStudyComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUsers()
+    this.getProfile()
     this.createStudyForm = this.fb.group({
       name: '',
       public: true,
@@ -62,6 +64,13 @@ export class CreateStudyComponent implements OnInit {
     })
   }
 
+  getProfile(): void {
+    this.http.post('../.netlify/functions/get_profile', null).subscribe((response) => {
+      this.profile = response;
+      console.log(this.profile)
+      //this.studies = null;
+    })
+  }
   onDateChange(event: any): void {
     this.selectedDate = event.value;
     console.log('Selected date:', this.selectedDate);
@@ -123,18 +132,40 @@ export class CreateStudyComponent implements OnInit {
   }
   public createNewProject(): void {
     const url = '../.netlify/functions/register';
+    let criterion: any [] = []
+    this.inputFields.controls.forEach(control => {
+      // Do something with each control
+      if(control.value.criteria != "") {
+        const criteria = {
+          name: control.value.criteria,
+          values: [],
+          isBoolean: true,
+          validated: "empty"
+        }
+        criterion.push(criteria);
+      }
+    });
+    console.log(criterion);
+    const inputDate = new Date(this.selectedDate);
+    const formattedDateString = inputDate.toISOString();
+    const formattedDateStringWithOffset = formattedDateString.replace("Z", "+00:00");
 
     //request object has to be correctly implemented
     const body = {
-      name: this.createStudyForm.get('name').value,
-      description: this.createStudyForm.get('description').value,
-      isPublic: true,
-      assignedUsers: this.assignedUsers,
-      requirements: this.inputFields.value,
-      due_date: this.selectedDate,
-      id:"6599afcd319a788ac3468f7x"
+        name: this.createStudyForm.get('name').value,
+        owner: this.profile.user_id,
+        description: this.createStudyForm.get('description').value,
+        isPublic: true,
+        assignedUsers: this.assignedUsers,
+        requirements: criterion,
+        due_date: formattedDateStringWithOffset,
+        id:"6599afcd319a788ac3468f7x1"
     }
     console.log(body);
+    this.http.post('../.netlify/functions/create_script', body).subscribe(response => {
+      // get the values of the response
+      console.log(response);
+    })
   }
 
 }
