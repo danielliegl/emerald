@@ -43,8 +43,17 @@ export class UserSidebarComponent implements OnInit {
       this.profile = response;
       console.log(this.profile.project_owner)
       if(this.profile.project_owner) {
-        ROUTES.splice(1, 0,     { path: '/user-panel/user-panel/create_study', title: 'Create Project', icon: 'create', class: ''},);
-        console.log(ROUTES);
+        const newRoute: RouteInfo = {
+          path: '/user-panel/user-panel/create_study',
+          title: 'Create Project',
+          icon: 'create',
+          class: ''
+        };
+        const routeExists = ROUTES.some(route => route.path === newRoute.path);
+        if (!routeExists) {
+          ROUTES.splice(1, 0, newRoute);
+          console.log(ROUTES);
+        }
       }
       this.menuItems = ROUTES.filter(menuItem => menuItem);
     })
