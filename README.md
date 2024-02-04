@@ -2,26 +2,23 @@
 
 ## Introduction
 
-## Planned Features
-
-- Registration and Login
-- Create, edit and delete Guideline Checklist (Scripts)
-- Assign Scripts to users
-- Import/Export Scripts and Study Results
+## Features
+- Account creation via Admin account
+- Login
+- Create Projects
+- Assign Projects to users
+- Fill out Criterions on Projects
 
 ## Requirements
 
 - GitHub account, at [github.com](https://github.com/).
-
 - MongoDB database host (v4 or higher), say at MongoDB Atlas
   [https://mongodb.com/atlas/](https://mongodb.com/atlas/).
-
 - NodeJS web host (v16), for example [https://netlify.com/](https://netlify.com/).
 
 ## Deploying Emerald
 
 ### MongoDB
-
 We used MongoDB Atlas for this example, feel free to use any other MongoDB host.
 
 1. Create an account on on MongoBD Atlas and choose the M0 plan, which is sufficient for storing
