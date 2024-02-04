@@ -1,7 +1,5 @@
 # Emerald - A Web-based Guideline Checking Tool
 
-## Introduction
-
 ## Features
 - Account creation via Admin account
 - Login
