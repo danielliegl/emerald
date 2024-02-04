@@ -22,6 +22,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   imports: [
@@ -37,6 +38,7 @@ import {MatButtonModule} from "@angular/material/button";
     MatPaginatorModule,
     MatDialogModule,
     MatButtonModule,
+    MatSnackBarModule
   ],
   declarations: [
     AppComponent,

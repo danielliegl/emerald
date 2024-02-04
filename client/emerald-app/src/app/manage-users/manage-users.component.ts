@@ -10,12 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { User, UserInfo } from './users';
-import { response } from 'express';
-import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
-import { Observable } from 'rxjs';
-// import { UserInfo } from 'app/models/userinfo';
-
-// Imports for the Table
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
 import {MatTableDataSource} from '@angular/material/table';
@@ -66,7 +61,7 @@ export class ManageUsersComponent implements OnInit {
 
   @ViewChild('targetCell') targetCell!: ElementRef;
   // , private exportService: ExportService
-  constructor(private http: HttpClient, private router: Router, private exportservice: ExportService) { }
+  constructor(private snackBar: MatSnackBar, private http: HttpClient, private router: Router, private exportservice: ExportService) { }
 
 
   addUserForm = new FormGroup({
@@ -138,22 +133,37 @@ export class ManageUsersComponent implements OnInit {
       // get the values of the response
       var user_array = Object["values"](response)
       this.dataSource.data = user_array;
+      console.log(user_array);
     })
-    
+
   }
 
+  showErrorMessage(message: string): void {
+    this.snackBar.open(message, 'Close', {
+      duration: 5000, // Duration in milliseconds
+      panelClass: ['error-snackbar'] // Optional: Add a custom CSS class for styling
+    });
+  }
   // Deletes Users.
-  deleteUser(user_id: any){
+  deleteUser(deleteUser: any){
+
+    if(deleteUser.admin) {
+      let otherAdminExists = this.dataSource.data.some(user => user.admin && user.id !== deleteUser.id);
+      if (!otherAdminExists) {
+        this.showErrorMessage('There must be at least one admin left.');
+        return;
+      }
+    }
     const url = '../.netlify/functions/delete_user';
-    console.log(user_id)
+    console.log(deleteUser.id)
     const id_object = {
-      id: user_id,
+      id: deleteUser.id,
     }
 
     var body = JSON.stringify(id_object)
     this.http.post(url, body).subscribe(response => {
     })
-    this.getUsers()
+    this.getUsers();
   }
   // Filtering the table accodingly
   filterProduct(value: string):void{

@@ -11,9 +11,9 @@
         </div>
       </div>
       <div class="card-body">
-        
+
         <form [formGroup]="addUserForm" (ngSubmit)="this.registerUser()">
-          
+
           <!-- ID Field -->
           <!-- <mat-form-field>
             <input matInput placeholder="ID" formControlName="id" />
@@ -67,7 +67,7 @@
             <input matInput type="text" [(ngModel)]="filterValue"
           (blur)="filterProduct(filterValue)" placeholder="Search username">
           </mat-form-field>
-          
+
           <!-- Angabe der Dynamisch geladenen Daten -->
           <mat-table [dataSource]="dataSource">
 
@@ -76,7 +76,7 @@
               <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
               <mat-cell *matCellDef="let elem"> {{elem.id}}</mat-cell>
             </ng-container>
-            
+
             <!-- Name of the SECOND Column -->
             <ng-container matColumnDef="username">
               <mat-header-cell *matHeaderCellDef mat-sort-header>Username</mat-header-cell>
@@ -100,7 +100,7 @@
             </ng-container>
 
             <!-- Columns for the DELETE and MODIFY Functions -->
-            
+
             <!-- <ng-container matColumnDef="edit">
               <mat-header-cell *matHeaderCellDef> Edit </mat-header-cell>
               <mat-cell *matCellDef="let element"> <button mat-icon-button matTooltip="Click to Edit"
@@ -112,14 +112,14 @@
             <ng-container matColumnDef="delete">
               <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
               <mat-cell *matCellDef="let element"> <button mat-icon-button matTooltip="Click to Delete"
-                  (click)="deleteUser(element.id)" color="warn">
+                  (click)="deleteUser(element)" color="warn">
                   <mat-icon>delete</mat-icon>
                 </button> </mat-cell>
             </ng-container>
 
             <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
             <mat-row *matRowDef="let row; columns: columnsToDisplay"></mat-row>
-            
+
           </mat-table>
           <br />
           <span layout="row"><hr flex/></span>

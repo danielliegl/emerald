@@ -42,11 +42,24 @@ export class UserSidebarComponent implements OnInit {
     this.http.post('../.netlify/functions/get_profile', null).subscribe((response) => {
       this.profile = response;
       console.log(this.profile.project_owner)
-      if(this.profile.project_owner) {
+      if(this.profile.project_owner || this.profile.admin) {
         const newRoute: RouteInfo = {
           path: '/user-panel/user-panel/create_study',
           title: 'Create Project',
           icon: 'create',
+          class: ''
+        };
+        const routeExists = ROUTES.some(route => route.path === newRoute.path);
+        if (!routeExists) {
+          ROUTES.splice(2, 0, newRoute);
+          console.log(ROUTES);
+        }
+      }
+      if(this.profile.admin) {
+        const newRoute: RouteInfo = {
+          path: '/admin-panel',
+          title: 'Admin Panel',
+          icon: 'assignment_ind',
           class: ''
         };
         const routeExists = ROUTES.some(route => route.path === newRoute.path);

@@ -48,8 +48,8 @@
                 <th mat-header-cell *matHeaderCellDef>Button</th>
                 <td mat-cell *matCellDef="let item">
                   <button mat-raised-button (click)="openConfirmationDialog(item)" *ngIf="hasValidated(item)">Evaluate</button>
-                  <button mat-raised-button (click)="openConfirmationDialog(item)" class="success-button" *ngIf="evaluationSuccess(item)">Success</button>
-                  <button mat-raised-button (click)="openConfirmationDialog(item)" class ="fail-button" *ngIf="evalutionFailure(item)">Failure</button>
+                  <button mat-raised-button (click)="openConfirmationDialog(item)" class="success-button" *ngIf="evaluationSuccess(item)">Yes</button>
+                  <button mat-raised-button (click)="openConfirmationDialog(item)" class ="fail-button" *ngIf="evalutionFailure(item)">No</button>
                 </td>
               </ng-container>
               <!-- add more columns as needed -->

@@ -3,7 +3,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-10 col-md-12">
-        <div class="card" *ngIf="user.project_owner">
+        <div class="card" *ngIf="user.project_owner || user.admin">
           <div class="card-header card-header-tabs card-header-success">
             <div class="nav-tabs-navigation">
               <div class="nav-tabs-wrapper">
