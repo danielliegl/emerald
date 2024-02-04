@@ -53,6 +53,3 @@ and database names, and database URI created the chapter before.
 - `MONGODB_DATABASE` = Database name
 - `MONGODB_URI` = MongoDB database URI with <password> replaced with actual password
 - `SECRET` = Freely select a secret (at least 32 characters is recommended )
-
-## Backend API
-Documentation for the backend can be found [here](doc/APIDocumentation.md).
