@@ -51,8 +51,7 @@ export class UserSidebarComponent implements OnInit {
         };
         const routeExists = ROUTES.some(route => route.path === newRoute.path);
         if (!routeExists) {
-          ROUTES.splice(2, 0, newRoute);
-          console.log(ROUTES);
+          ROUTES.splice(1, 0, newRoute);
         }
       }
       if(this.profile.admin) {
